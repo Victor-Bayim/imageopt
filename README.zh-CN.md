@@ -6,7 +6,7 @@
 
 采样器挂载 eBPF 程序，观测容器命名空间内的文件访问事件。这些事件按路径聚合、经过质量门控过滤，然后转成预取列表。可选的 LLM 阶段可在提供模型时对优选路径重排；默认路径完全确定。应用脚本把 hints 注入 eStargz 镜像，严格基准测试在 stargz-snapshotter 下测量冷启动时间。
 
-便携检查（无需容器、无需 API 密钥）覆盖 selector、质量门控、provider 合同和记录验证。完整 Linux 流程需要 containerd/nerdctl、stargz-snapshotter 和支持 eBPF 的内核。采样为文件级；支持块级后处理以供后续分析。归档结果中的 LLM 批次使用的是手工导入的响应，而非在线 API 调用。
+便携检查（无需容器、无需 API 密钥）覆盖 selector、质量门控、provider 合同和记录验证。完整 Linux 流程需要 containerd/nerdctl、stargz-snapshotter 和支持 eBPF 的内核。采样为文件级；支持块级后处理以供后续分析。
 
 ```bash
 # 便携检查
