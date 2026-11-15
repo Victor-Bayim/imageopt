@@ -1,22 +1,25 @@
 [English](README.md) | **简体中文**
 
-# imageopt：基于 eBPF 的容器冷启动优化
+# imageopt：eBPF 容器冷启动
 
-通过 eBPF 记录容器真实 OPEN/MMAP 模式并生成 eStargz prefetch hints 的冷启动优化。在受控工作负载上，懒加载冷启动时间从 2.360 s 降至 1.677 s（确定性），从 2.763 s 降至 2.101 s（LLM 辅助批次）——分别降低 **28.9%** 和 **24.0%**。
+eBPF 看容器里的 OPEN/MMAP，写出 eStargz prefetch hints。受控工作负载，懒加载冷启动：
 
-采样器挂载 eBPF 程序，观测容器命名空间内的文件访问事件。这些事件按路径聚合、经过质量门控过滤，然后转成预取列表。可选的 LLM 阶段可在提供模型时对优选路径重排；默认路径完全确定。应用脚本把 hints 注入 eStargz 镜像，严格基准测试在 stargz-snapshotter 下测量冷启动时间。
+| 路径 | 之前 | 之后 | 降幅 |
+| --- | ---: | ---: | ---: |
+| 确定性 | 2.360 s | 1.677 s | **28.9%** |
+| LLM 重排 | 2.763 s | 2.101 s | **24.0%** |
 
-便携检查（无需容器、无需 API 密钥）覆盖 selector、质量门控、provider 合同和记录验证。完整 Linux 流程需要 containerd/nerdctl、stargz-snapshotter 和支持 eBPF 的内核。采样为文件级；支持块级后处理以供后续分析。
+采样器挂一个 BPF 程序，范围限定在容器命名空间。事件按路径聚合，过质量门，写成预取列表。默认选择是确定的。接上模型时，LLM 阶段可以重排这个列表。应用脚本把 hints 写进 eStargz 镜像；严格基准在 stargz-snapshotter 下测冷启动。
+
+采样是文件级。块级后处理在仓库里，用于第二遍。便携检查（selector、质量门、provider 合同、记录哈希）只要 Python 3.10 和标准库。完整路径要 Linux、containerd/nerdctl、stargz-snapshotter，以及带 eBPF 的内核。
 
 ```bash
-# 便携检查
 python tools/validate_portable.py
 python tools/demo_selector.py
 python tools/verify_records.py
 
-# 完整流程
 python3 scripts/oneclick_product.py run <IMAGE> --work-dir /tmp/run
 python3 scripts/oneclick_product.py report --work-dir /tmp/run
 ```
 
-为腾讯犀牛鸟开源计划开发。
+腾讯犀牛鸟开源计划。
