@@ -1,0 +1,14 @@
+# Example run config for the formally verified TF Serving half-plus-two workload.
+# Edit model_host for your own machine before use.
+#
+# model_host must point to the host directory that will be mounted as
+# /models/half_plus_two inside the container. The host-side layout should look
+# like:
+#   /abs/path/to/half_plus_two/1/saved_model.pb
+#   /abs/path/to/half_plus_two/1/variables/...
+
+preset: tf-serving-half-plus-two
+model_host: /abs/path/to/half_plus_two
+apply: true
+benchmark: true
+bench_runs: 3

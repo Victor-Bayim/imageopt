@@ -1,0 +1,20 @@
+{
+  "run_date": "2026-11-15T11:58:27.638295+00:00",
+  "platform": "Windows",
+  "python": "3.12.14",
+  "tests": 74,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "success": true,
+  "modules": [
+    "test_llm_provider_parsing",
+    "test_llm_provider_mock",
+    "test_llm_provider_config",
+    "test_orchestrator_runtime",
+    "test_orchestrator_workloads",
+    "test_pipeline_tools.SelectorTests",
+    "test_quality_gate"
+  ],
+  "scope": "Original provider, runtime, workload, selector and quality-gate tests, with one interpreter-portability fix; no end-to-end container performance experiment."
+}

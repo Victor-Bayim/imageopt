@@ -1,0 +1,6 @@
+{
+  "predict_reads_late_file": true,
+  "ready_reads_only_hot_paths": true,
+  "layout_root": "/srv/layout",
+  "buffer_size_bytes": 262144
+}

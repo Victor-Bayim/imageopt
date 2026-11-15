@@ -1,0 +1,810 @@
+{
+  "origin": "User-supplied imageopt historical evidence archive",
+  "restored_on": "2026-11-15",
+  "source_base_commit": "e17f078ad38b7dd5ca9535c3934e523c4961a50c",
+  "scope": "Restored implementation snapshot; not a new Linux/container performance measurement",
+  "files": [
+    {
+      "path": "configs/tf-serving-efficientnet-v2-b0.embedded.example.yaml",
+      "archive_path": "source/configs/tf-serving-efficientnet-v2-b0.embedded.example.yaml",
+      "sha256": "9a3762e4b886b53e1a0107d05d32595e9f162f122bd38a73f6f55fc57e511231"
+    },
+    {
+      "path": "configs/tf-serving-efficientnet-v2-b0.external.example.yaml",
+      "archive_path": "source/configs/tf-serving-efficientnet-v2-b0.external.example.yaml",
+      "sha256": "ef1a6aa8c435a9424f7926d455342ba4f7c4f86cf1d787caa77c75429bef92e9"
+    },
+    {
+      "path": "configs/tf-serving-half-plus-two.example.yaml",
+      "archive_path": "source/configs/tf-serving-half-plus-two.example.yaml",
+      "sha256": "8b175b458fc7be6ad2f72489519b0d5de83a5adf0e22dda5a2c1a3de99ff8c9f"
+    },
+    {
+      "path": "configs/weights.json",
+      "archive_path": "source/configs/weights.json",
+      "sha256": "5c40deac8c20c2aca45a8c88bc0d74749740969bfa06e1da901e5ba22d90190f"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "archive_path": "source/docs/ARCHITECTURE.md",
+      "sha256": "1cb67d6a8ddfc9f3dfc5279f02bee2eb3c368747f70a7ea33b04cd0cd5cf2e4e"
+    },
+    {
+      "path": "docs/EXPERIMENTS.md",
+      "archive_path": "source/docs/EXPERIMENTS.md",
+      "sha256": "8dd86d46d3646988d3a261e77843b756c9fcedde12fcd7c5e6f35d00a5b4e6dd"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_NOTES.md",
+      "archive_path": "source/docs/IMPLEMENTATION_NOTES.md",
+      "sha256": "8724fdf4871e8cb3b2708862e9f4219f0418f1fc2f80620db875db6325950e94"
+    },
+    {
+      "path": "docs/KNOWN_LIMITATIONS.md",
+      "archive_path": "source/docs/KNOWN_LIMITATIONS.md",
+      "sha256": "2e02ba9924af2fb8fdd952028a3c93029e323f2ad90f11ba200ab5e008bac049"
+    },
+    {
+      "path": "docs/USAGE.md",
+      "archive_path": "source/docs/USAGE.md",
+      "sha256": "5f9127e9f7d9b457e96d9e7a4937304b8fd3b43b122d6dad8baefb5a0dbc80d9"
+    },
+    {
+      "path": "optimizer/aggregate_candidates.py",
+      "archive_path": "source/optimizer/aggregate_candidates.py",
+      "sha256": "7067d0464de7f549c431aaa865ac6e32b289b3b764be228481c7b09fcf77faae"
+    },
+    {
+      "path": "optimizer/tools/aggregate_candidates.py",
+      "archive_path": "source/optimizer/tools/aggregate_candidates.py",
+      "sha256": "c625e6291ada4accab7295da08ce6912e7900163cc5d5084ee13f3b54019c83c"
+    },
+    {
+      "path": "optimizer/tools/build_chunk_selector_shadow.py",
+      "archive_path": "source/optimizer/tools/build_chunk_selector_shadow.py",
+      "sha256": "ec45ee2802808bb1a7513aa30f87adde0b61ce4cf994fe0d6027b230d1491b2a"
+    },
+    {
+      "path": "optimizer/tools/build_devino_dict.py",
+      "archive_path": "source/optimizer/tools/build_devino_dict.py",
+      "sha256": "8095562f39a198d0fbefd685b7701e541e443d6a20ad66e50dd670100b6f4fca"
+    },
+    {
+      "path": "optimizer/tools/build_llm_prompt.py",
+      "archive_path": "source/optimizer/tools/build_llm_prompt.py",
+      "sha256": "4609571bf3d819e0a792bdd9be49b10b1256f3d33811fef44bf4d655320f6a0f"
+    },
+    {
+      "path": "optimizer/tools/build_toc_shadow.py",
+      "archive_path": "source/optimizer/tools/build_toc_shadow.py",
+      "sha256": "259a20a5deb48b7f6535a7bf2b9f33d2ed73927d5c29d33cbd7f0fcadcbffe9f"
+    },
+    {
+      "path": "optimizer/tools/enrich_mmap_events.py",
+      "archive_path": "source/optimizer/tools/enrich_mmap_events.py",
+      "sha256": "913e16b6aee19ecb5e09a85212f49ed44bd7e45302cae7736edfee44c007e6a5"
+    },
+    {
+      "path": "optimizer/tools/export_events.py",
+      "archive_path": "source/optimizer/tools/export_events.py",
+      "sha256": "7e6a6b15876e10dad75354b4d2a7b9398a371a6188c24db97e4d9c4c342d4edd"
+    },
+    {
+      "path": "optimizer/tools/export_image_toc.py",
+      "archive_path": "source/optimizer/tools/export_image_toc.py",
+      "sha256": "5a104da770b94cceebf5268de7d42c8079d772526a3a8b9caa60faa7d86d7504"
+    },
+    {
+      "path": "optimizer/tools/prepare_preferred_paths.py",
+      "archive_path": "source/optimizer/tools/prepare_preferred_paths.py",
+      "sha256": "1c0b4dfd14d98f1f1d5d75985846be00dbe61e83b31a328b1d12633dbef40036"
+    },
+    {
+      "path": "optimizer/tools/quality_gate.py",
+      "archive_path": "source/optimizer/tools/quality_gate.py",
+      "sha256": "ca4455e5f062ae63f1c0babf11eb57eba6667bdf5f29cd9a1eaa5bfcf6d25747"
+    },
+    {
+      "path": "optimizer/tools/select_prefetch_paths.py",
+      "archive_path": "source/optimizer/tools/select_prefetch_paths.py",
+      "sha256": "b6499fc87c33c30e7abc29f1df2d4e38e6df10695cedcb4cc543d2ef38778bf1"
+    },
+    {
+      "path": "optimizer/tools/snapshot_maps.py",
+      "archive_path": "source/optimizer/tools/snapshot_maps.py",
+      "sha256": "00be6c2d92e99dfd24547f2632b5f45fab02dd50a2317bbaf9cb3003a724951d"
+    },
+    {
+      "path": "orchestrator/__init__.py",
+      "archive_path": "source/orchestrator/__init__.py",
+      "sha256": "a1b7c8099d3480a5e54a66e1abade1fe2247dae826ab6c1f6348de67488e37a8"
+    },
+    {
+      "path": "orchestrator/assets/startup_gate_launcher.c",
+      "archive_path": "source/orchestrator/assets/startup_gate_launcher.c",
+      "sha256": "13a12df6e13fec0b97f1ae0676bfc21da09f08b2e7c66f1e55b807c9b8fa1201"
+    },
+    {
+      "path": "orchestrator/container_runtime.py",
+      "archive_path": "source/orchestrator/container_runtime.py",
+      "sha256": "9175175d914d7930bac621bda3bc40af1d96e0323cfc696c6342947ba3a2b382"
+    },
+    {
+      "path": "orchestrator/llm.py",
+      "archive_path": "source/orchestrator/llm.py",
+      "sha256": "7f3d0bb10b4f8240afe894843056070d19bdf3bacd1bc61e7b8434aa66429834"
+    },
+    {
+      "path": "orchestrator/llm_providers/__init__.py",
+      "archive_path": "source/orchestrator/llm_providers/__init__.py",
+      "sha256": "8b5c4d99340ce412ddddc68c089d96ab7fd9ad67c121aaad0c5d74a0f876ad1d"
+    },
+    {
+      "path": "orchestrator/llm_providers/base.py",
+      "archive_path": "source/orchestrator/llm_providers/base.py",
+      "sha256": "eaeb2196c0594a815f04d33c2666e4f89d76afd2442c63f140c44a9786d63820"
+    },
+    {
+      "path": "orchestrator/llm_providers/mock.py",
+      "archive_path": "source/orchestrator/llm_providers/mock.py",
+      "sha256": "a5927bb3d338785f75dae6ae84d31a1c9c74d90b859ca9f750696628a63f7c08"
+    },
+    {
+      "path": "orchestrator/llm_providers/openai_compatible.py",
+      "archive_path": "source/orchestrator/llm_providers/openai_compatible.py",
+      "sha256": "32dcd4d89cae25525e334527e9d37a7dc035ce0a1160819d944ee9625f7c9b8a"
+    },
+    {
+      "path": "orchestrator/llm_providers/openai_responses.py",
+      "archive_path": "source/orchestrator/llm_providers/openai_responses.py",
+      "sha256": "3980da20b164bd881bebd38e0630db3075ffb51f333633901ecb2ca128400f12"
+    },
+    {
+      "path": "orchestrator/llm_providers/parsing.py",
+      "archive_path": "source/orchestrator/llm_providers/parsing.py",
+      "sha256": "9e0fc2658f263fb23fef7986c9c34fe50ed9eb7dbbd55f0b6b58671a29ca6a4c"
+    },
+    {
+      "path": "orchestrator/llm_providers/router.py",
+      "archive_path": "source/orchestrator/llm_providers/router.py",
+      "sha256": "250ed44649249a56d58ed969bed7c855805cd6db0997d73d2667fa59cf9bdead"
+    },
+    {
+      "path": "orchestrator/llm_providers/types.py",
+      "archive_path": "source/orchestrator/llm_providers/types.py",
+      "sha256": "dee8fe3fc4d333eb6193148e71787418f9df05868eaa3265b63c5af8e51a19d6"
+    },
+    {
+      "path": "orchestrator/manifest.py",
+      "archive_path": "source/orchestrator/manifest.py",
+      "sha256": "cb24247479423566741cfcaf8aba28e7e0bc4688d86464ac0a33223dfc844feb"
+    },
+    {
+      "path": "orchestrator/policy.py",
+      "archive_path": "source/orchestrator/policy.py",
+      "sha256": "f4f11f46fd95800e56ab31fe16d3031539500321003ee75abe412dbff705dd9c"
+    },
+    {
+      "path": "orchestrator/product_policy.py",
+      "archive_path": "source/orchestrator/product_policy.py",
+      "sha256": "56e2fa4c7556c36bde13921e95ae3f57d5fed25092ff3b778888c353dcbef4ae"
+    },
+    {
+      "path": "orchestrator/runtime.py",
+      "archive_path": "source/orchestrator/runtime.py",
+      "sha256": "80e0bd49af02b804ac4877e2ff73674834116c7739332a75c5a3ec21ea856a0f"
+    },
+    {
+      "path": "orchestrator/stages/__init__.py",
+      "archive_path": "source/orchestrator/stages/__init__.py",
+      "sha256": "4933f5cfa663ef1db2d9f20f532c7e3022b5815af27af8daeb53ca299a025f47"
+    },
+    {
+      "path": "orchestrator/stages/analyze.py",
+      "archive_path": "source/orchestrator/stages/analyze.py",
+      "sha256": "7c3d9567c085da5e3a7797c4afe4f5c93fd2c31f5a81e103fbe2118c75631437"
+    },
+    {
+      "path": "orchestrator/stages/apply.py",
+      "archive_path": "source/orchestrator/stages/apply.py",
+      "sha256": "fc3308a5ac935fd082d25d09b5bf541f405824d49c0200a1cd0a93d98da6b3bb"
+    },
+    {
+      "path": "orchestrator/stages/benchmark.py",
+      "archive_path": "source/orchestrator/stages/benchmark.py",
+      "sha256": "51617bf1193b15061b3e963231e10b10efb4313fb3bb5cc59fa18c39f5d608e0"
+    },
+    {
+      "path": "orchestrator/stages/envcheck.py",
+      "archive_path": "source/orchestrator/stages/envcheck.py",
+      "sha256": "33a590a51a4ac1fe84a994da9bdbe27f659ee07149b9608ef5a8776f937baf88"
+    },
+    {
+      "path": "orchestrator/stages/export_enrich.py",
+      "archive_path": "source/orchestrator/stages/export_enrich.py",
+      "sha256": "4ad0198f5d7ee7805519483b7a67ee0a719b78567b1d5f0824af57b0aed18c19"
+    },
+    {
+      "path": "orchestrator/stages/llm_optimize.py",
+      "archive_path": "source/orchestrator/stages/llm_optimize.py",
+      "sha256": "5fd45152f7487bd87e3f17718677e938050d94d3d03a0c15f7dc6421fece4898"
+    },
+    {
+      "path": "orchestrator/stages/preflight.py",
+      "archive_path": "source/orchestrator/stages/preflight.py",
+      "sha256": "6c23e270325e9a9eaebf4e2363875da5af16d83c061eb919980e5be135a9ed77"
+    },
+    {
+      "path": "orchestrator/stages/publish.py",
+      "archive_path": "source/orchestrator/stages/publish.py",
+      "sha256": "db379d9660b5dabda49bbf0410e7a002712ae4cd4457d07391db29ea40c0fcdf"
+    },
+    {
+      "path": "orchestrator/stages/report.py",
+      "archive_path": "source/orchestrator/stages/report.py",
+      "sha256": "db9ef7a5491a5f8adc6c9bacff6f301aeba8624568b335fec5d030c87087d6e2"
+    },
+    {
+      "path": "orchestrator/stages/sample.py",
+      "archive_path": "source/orchestrator/stages/sample.py",
+      "sha256": "3fcd41c4c1ff2405588676406b4e2a66e6c2ad3b48b9afdea7e2c323b107a771"
+    },
+    {
+      "path": "orchestrator/workloads/__init__.py",
+      "archive_path": "source/orchestrator/workloads/__init__.py",
+      "sha256": "0b46273cddbd44957ce17b05084a58f2413ce3127309dfb989ef1a8efcd7cc10"
+    },
+    {
+      "path": "orchestrator/workloads/base.py",
+      "archive_path": "source/orchestrator/workloads/base.py",
+      "sha256": "91948bbb79e76836d41cc693dca9d19a20b6cea92bbc8d34eb61503c2b7e8363"
+    },
+    {
+      "path": "orchestrator/workloads/builtin.py",
+      "archive_path": "source/orchestrator/workloads/builtin.py",
+      "sha256": "f6e9e04518ddb14ed09d770b8fb1a7fbb488e366a5d2203d009b26459f274f98"
+    },
+    {
+      "path": "orchestrator/workloads/execution.py",
+      "archive_path": "source/orchestrator/workloads/execution.py",
+      "sha256": "b71388d162a2973a874d5c0a503f64f666cc75209b728fa5f93839b22516fb97"
+    },
+    {
+      "path": "orchestrator/workloads/hooks.py",
+      "archive_path": "source/orchestrator/workloads/hooks.py",
+      "sha256": "cf6533b54d737b3ffb75caf70a7549c4d6f4f23b8e7476d3a72fe7eaff0862d7"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/__init__.py",
+      "archive_path": "source/orchestrator/workloads/plugins/__init__.py",
+      "sha256": "5384bfdb2df380b6557cc7a71d16891415bccaa87699406e236f752c6415389f"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/none.py",
+      "archive_path": "source/orchestrator/workloads/plugins/none.py",
+      "sha256": "e486258f902957d9b751e0af6cbdfbe056781858c8fb3e618b6defff6063c0c4"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/ready_serving_bootstrap_v2.py",
+      "archive_path": "source/orchestrator/workloads/plugins/ready_serving_bootstrap_v2.py",
+      "sha256": "9e11ca8a170c129617472d0d882229c39b33845636ff41dda459e07b403d4929"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/ready_serving_layout_trap_v3.py",
+      "archive_path": "source/orchestrator/workloads/plugins/ready_serving_layout_trap_v3.py",
+      "sha256": "afda0d009a4906474e7d3207c068d61b9aa370d05309d780a629256d1d21a7ec"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/ready_serving_layout_trap_v4.py",
+      "archive_path": "source/orchestrator/workloads/plugins/ready_serving_layout_trap_v4.py",
+      "sha256": "2d4a33f9a790a7afa12ce16069829519b04d94d5cb486ec24489f5d351222d05"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/ready_serving_layout_trap_v5.py",
+      "archive_path": "source/orchestrator/workloads/plugins/ready_serving_layout_trap_v5.py",
+      "sha256": "fcdb6549566d232bf924b38bcfe8e3170db614345a425ae4205c86bd6939bbb6"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/tf_serving_efficientnet_v2_b0.py",
+      "archive_path": "source/orchestrator/workloads/plugins/tf_serving_efficientnet_v2_b0.py",
+      "sha256": "625ab1be610ec2150148b3e31e2f932cad36d71b2102a71a9578970651bcd554"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/tf_serving_half_plus_two.py",
+      "archive_path": "source/orchestrator/workloads/plugins/tf_serving_half_plus_two.py",
+      "sha256": "bb21da7bd27b57fe2f024ea181686869b75a231fc7b01a9f3c0b61cc6f9a2cb9"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/tfpy_half_plus_two_io1g.py",
+      "archive_path": "source/orchestrator/workloads/plugins/tfpy_half_plus_two_io1g.py",
+      "sha256": "f2de590c02d60967ccdcefed1ac5e972a9491b27f748f8f58cca0c5388ee197c"
+    },
+    {
+      "path": "orchestrator/workloads/plugins/tfpy_half_plus_two_io1g.sample_input.json",
+      "archive_path": "source/orchestrator/workloads/plugins/tfpy_half_plus_two_io1g.sample_input.json",
+      "sha256": "075ca081b92e732b5f33a4b4a7bc5d5a14984b1453944c1372558b3f49cef960"
+    },
+    {
+      "path": "orchestrator/workloads/registry.py",
+      "archive_path": "source/orchestrator/workloads/registry.py",
+      "sha256": "96bd8be31fa78d1790ffcf07a2aec0a8ebffc41d7774c6665d164ac39d01ce22"
+    },
+    {
+      "path": "orchestrator/workloads/resolver.py",
+      "archive_path": "source/orchestrator/workloads/resolver.py",
+      "sha256": "9c899a29e74834f96688fc807cc06c282c9a5fe9001872e33cfd54c69450ddbb"
+    },
+    {
+      "path": "probes/sample_input.json",
+      "archive_path": "source/probes/sample_input.json",
+      "sha256": "383331d41130979f9eeed59b37e3b8428988fdc73d1b9b2f931a9d2081feb77f"
+    },
+    {
+      "path": "docs/ORIGINAL_PROJECT_README.md",
+      "archive_path": "source/README.md",
+      "sha256": "74144a8aae740162caf2be84f2949a7f57712b0e94768113b02010383982f195"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/.dockerignore",
+      "archive_path": "source/ready-serving-layout-trap-v4/.dockerignore",
+      "sha256": "468f13b9cc3d2c47ac7bebb428e53c72ff20b3776e2ed62a2f5d11f383719bd6"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/cmd/server/main.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/cmd/server/main.go",
+      "sha256": "828554f08ab9b051b6ce8d66137ba0666ebd1c788c1c0be244569f882bb2a53f"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/internal/bootstrap/config.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/internal/bootstrap/config.go",
+      "sha256": "0a2934aa3111269d7430f3a411c96d4397cdcee2c4189fdae8dd69271093c3ce"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/internal/bootstrap/reader.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/internal/bootstrap/reader.go",
+      "sha256": "b284d401e3386a6f537474635206fe178491f546cfc8a60bc1563422f303f69a"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/internal/bootstrap/startup_plan.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/internal/bootstrap/startup_plan.go",
+      "sha256": "73928aca3a8a78795b7af7d011911b81d7f1526f03cec4a13394a248bd20b8ca"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/internal/bootstrap/state.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/internal/bootstrap/state.go",
+      "sha256": "c9da2602d6cf40cf842767cc1b094749c93f4d17e5f25b7964f637ccfaf573da"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/internal/bootstrap/state_test.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/internal/bootstrap/state_test.go",
+      "sha256": "c75b065561e9ec35f37c34b0ac76cb7dc508ba6e1590e0cd4fcc1414843727a0"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/internal/httpapi/server.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/internal/httpapi/server.go",
+      "sha256": "00495e350f4625bb810c994923789aa5cc1640a1c6faa304bdd5c0795eaa2193"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/internal/httpapi/server_test.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/internal/httpapi/server_test.go",
+      "sha256": "8fa937fae48b2847880eeebd801ce9a314385d5a62126766cd43f0287531c750"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/app/internal/infer/predict.go",
+      "archive_path": "source/ready-serving-layout-trap-v4/app/internal/infer/predict.go",
+      "sha256": "2e7f6d48b1c386fc1cec105760bb7a1327f148b14fa86323169dc865addbb4d3"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/configs/default.yaml",
+      "archive_path": "source/ready-serving-layout-trap-v4/configs/default.yaml",
+      "sha256": "98103bd36d95bac7a6e22f2c3f12d24413a7b502fa21cabd3a9b3288704e16b3"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/configs/routes.json",
+      "archive_path": "source/ready-serving-layout-trap-v4/configs/routes.json",
+      "sha256": "acb3e467b0f5fa22c39a71c99dc3ce670b7d27849a6fdeab6de5ac8938d6605b"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/configs/runtime_policy.json",
+      "archive_path": "source/ready-serving-layout-trap-v4/configs/runtime_policy.json",
+      "sha256": "e80c82befe5afa85bb2312ed65a609296375affd5a35a66e97487ec2157fafcb"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/go.mod",
+      "archive_path": "source/ready-serving-layout-trap-v4/go.mod",
+      "sha256": "faaa339bdcef497b9749167d564cd843bb119d95ea6f6476b1b944bb1d3c5d13"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/image/Dockerfile",
+      "archive_path": "source/ready-serving-layout-trap-v4/image/Dockerfile",
+      "sha256": "47bc6a226d30ac221145b81902fd9f70342d1357886263748edb170963b4b051"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/probes/sample_input.json",
+      "archive_path": "source/ready-serving-layout-trap-v4/probes/sample_input.json",
+      "sha256": "383331d41130979f9eeed59b37e3b8428988fdc73d1b9b2f931a9d2081feb77f"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/resources/control/layout_stats.json",
+      "archive_path": "source/ready-serving-layout-trap-v4/resources/control/layout_stats.json",
+      "sha256": "ca00b2118dd33699b4c8917f98e8a57a25b123674527ac0af5c84ffdfc10bc6b"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/resources/control/slot_map.csv",
+      "archive_path": "source/ready-serving-layout-trap-v4/resources/control/slot_map.csv",
+      "sha256": "58d6bc987c54b95f8fa0ab344f034a8ea0051f05c564c95cd81e66ffbaade777"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/resources/control/startup_plan.json",
+      "archive_path": "source/ready-serving-layout-trap-v4/resources/control/startup_plan.json",
+      "sha256": "52d81f82cfbec58c6ebc5c215bce8e402e3030768025189abb16c10f46ce153b"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/tests/test_resources.py",
+      "archive_path": "source/ready-serving-layout-trap-v4/tests/test_resources.py",
+      "sha256": "f1ab03390553e197500c8afcd3c9d3cf4c39114f353e2b5269e91f59c0bb3de5"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/tools/__init__.py",
+      "archive_path": "source/ready-serving-layout-trap-v4/tools/__init__.py",
+      "sha256": "630856e53cf78890abf83dfe9d9c31fedb1ee24e1c7458b47e5f53a3c8a5bec5"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/tools/gen_resources.py",
+      "archive_path": "source/ready-serving-layout-trap-v4/tools/gen_resources.py",
+      "sha256": "c244d5eddb1a2168af8d201c316704242221fc9b2512c2de9d8648b08b1c19fb"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/tools/inspect_tar_order.py",
+      "archive_path": "source/ready-serving-layout-trap-v4/tools/inspect_tar_order.py",
+      "sha256": "0a0b969371048164a4b54c51c8d9a081a5404920f2a6814ea3457320b34c9267"
+    },
+    {
+      "path": "ready-serving-layout-trap-v4/tools/verify_resources.py",
+      "archive_path": "source/ready-serving-layout-trap-v4/tools/verify_resources.py",
+      "sha256": "204755b9b2e1c90c7659763c503d8329febe3aba90c0ca6657a98b16f74cc9f9"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/.dockerignore",
+      "archive_path": "source/ready-serving-layout-trap-v5/.dockerignore",
+      "sha256": "468f13b9cc3d2c47ac7bebb428e53c72ff20b3776e2ed62a2f5d11f383719bd6"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/cmd/server/main.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/cmd/server/main.go",
+      "sha256": "b2d9d7245113821caddb0f82748594e2d19cfc583a764bc86d82a89f5701c275"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/internal/bootstrap/config.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/internal/bootstrap/config.go",
+      "sha256": "0a2934aa3111269d7430f3a411c96d4397cdcee2c4189fdae8dd69271093c3ce"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/internal/bootstrap/reader.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/internal/bootstrap/reader.go",
+      "sha256": "b284d401e3386a6f537474635206fe178491f546cfc8a60bc1563422f303f69a"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/internal/bootstrap/startup_plan.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/internal/bootstrap/startup_plan.go",
+      "sha256": "73928aca3a8a78795b7af7d011911b81d7f1526f03cec4a13394a248bd20b8ca"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/internal/bootstrap/state.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/internal/bootstrap/state.go",
+      "sha256": "c9da2602d6cf40cf842767cc1b094749c93f4d17e5f25b7964f637ccfaf573da"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/internal/bootstrap/state_test.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/internal/bootstrap/state_test.go",
+      "sha256": "c75b065561e9ec35f37c34b0ac76cb7dc508ba6e1590e0cd4fcc1414843727a0"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/internal/httpapi/server.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/internal/httpapi/server.go",
+      "sha256": "0b0e705d089f59772d9de7475eec80c10b15f45f7b170496ba6a6c1e982d1711"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/internal/httpapi/server_test.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/internal/httpapi/server_test.go",
+      "sha256": "7f32256f857b888b44814ad834c8a3e772e6cf2a73a79a71aca0f5bf0506e4c8"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/app/internal/infer/predict.go",
+      "archive_path": "source/ready-serving-layout-trap-v5/app/internal/infer/predict.go",
+      "sha256": "577c036ca128d4c8170c33df37ce210c43a9790344dbbb17fe6e269745808276"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/configs/default.yaml",
+      "archive_path": "source/ready-serving-layout-trap-v5/configs/default.yaml",
+      "sha256": "b5b39d961fecbd7e1ab1876460f4633a52ed102f7acb8e09f4a7db15c87533b2"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/configs/routes.json",
+      "archive_path": "source/ready-serving-layout-trap-v5/configs/routes.json",
+      "sha256": "acb3e467b0f5fa22c39a71c99dc3ce670b7d27849a6fdeab6de5ac8938d6605b"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/configs/runtime_policy.json",
+      "archive_path": "source/ready-serving-layout-trap-v5/configs/runtime_policy.json",
+      "sha256": "e80c82befe5afa85bb2312ed65a609296375affd5a35a66e97487ec2157fafcb"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/go.mod",
+      "archive_path": "source/ready-serving-layout-trap-v5/go.mod",
+      "sha256": "a928469fbd70e6de2b47b410164d1a2bf6fc15607f1f21a9475ab65f3fbee294"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/image/Dockerfile",
+      "archive_path": "source/ready-serving-layout-trap-v5/image/Dockerfile",
+      "sha256": "47bc6a226d30ac221145b81902fd9f70342d1357886263748edb170963b4b051"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/probes/sample_input.json",
+      "archive_path": "source/ready-serving-layout-trap-v5/probes/sample_input.json",
+      "sha256": "383331d41130979f9eeed59b37e3b8428988fdc73d1b9b2f931a9d2081feb77f"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/resources/control/.gitkeep",
+      "archive_path": "source/ready-serving-layout-trap-v5/resources/control/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/resources/control/layout_stats.json",
+      "archive_path": "source/ready-serving-layout-trap-v5/resources/control/layout_stats.json",
+      "sha256": "bfe8f85d256e2a635affdf1319375c58c5b845bff93614b5f689fa9eece672bd"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/resources/control/slot_map.csv",
+      "archive_path": "source/ready-serving-layout-trap-v5/resources/control/slot_map.csv",
+      "sha256": "e65024ea0d6bd2d9e9d9479d251bec51fd3aac5b232cba8c40dc8651469bfc86"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/resources/control/startup_plan.json",
+      "archive_path": "source/ready-serving-layout-trap-v5/resources/control/startup_plan.json",
+      "sha256": "a64d4e451fcaf4e52823bd04948046616a92f8457b32e9bc90a6db7ecbc6db09"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/tests/test_resources.py",
+      "archive_path": "source/ready-serving-layout-trap-v5/tests/test_resources.py",
+      "sha256": "e8fc21091cb70af49e87177d129b589eec070b7e49b0bbc104d4cde9c755ea3a"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/tools/__init__.py",
+      "archive_path": "source/ready-serving-layout-trap-v5/tools/__init__.py",
+      "sha256": "464e3470067f664f9fb67eca482253504de96de151b88ea5a304cc27a01d0ab3"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/tools/gen_resources.py",
+      "archive_path": "source/ready-serving-layout-trap-v5/tools/gen_resources.py",
+      "sha256": "2f220055f7b15e8acf8a0ebc4fdaf1a9bd1756a9a112c1c19e682a220db6e1b6"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/tools/inspect_tar_order.py",
+      "archive_path": "source/ready-serving-layout-trap-v5/tools/inspect_tar_order.py",
+      "sha256": "2dc78247084899a3fac6b6c9035853b0eecdfa41259debd73b4b1c47ce12dc6f"
+    },
+    {
+      "path": "ready-serving-layout-trap-v5/tools/verify_resources.py",
+      "archive_path": "source/ready-serving-layout-trap-v5/tools/verify_resources.py",
+      "sha256": "356d822aba32693a73ce0dd01c887ac00135ad27dd1afa642bf53e275a4f735e"
+    },
+    {
+      "path": "sampler/BPF/file_access_ebpf_trace.bpf.c",
+      "archive_path": "source/sampler/BPF/file_access_ebpf_trace.bpf.c",
+      "sha256": "b34ce2608308f86a4298247cd85fd04f9ebcee8c074601236d2ffad609387801"
+    },
+    {
+      "path": "sampler/common/file_event_abi.h",
+      "archive_path": "source/sampler/common/file_event_abi.h",
+      "sha256": "16b1396a39ec82d5a952c068ca6280a461e9a243934fd872f9f21a995f397915"
+    },
+    {
+      "path": "sampler/scripts/build_bpf.sh",
+      "archive_path": "source/sampler/scripts/build_bpf.sh",
+      "sha256": "5d7f408dced87e5d0d90ca16d573dc7c4240f24ce9db9b65b9246d5425c77d92"
+    },
+    {
+      "path": "sampler/scripts/sampler_run.fish",
+      "archive_path": "source/sampler/scripts/sampler_run.fish",
+      "sha256": "721b891bf955dc13c04d05c2e5eaea4cbd9ef67747ae5594fa659d405abbd0b8"
+    },
+    {
+      "path": "sampler/scripts/sampler_run.sh",
+      "archive_path": "source/sampler/scripts/sampler_run.sh",
+      "sha256": "e1ebc830e7270f9229b30dce4b6017fc5f75749f3ce7cb3d45b7cb7e6b876a2a"
+    },
+    {
+      "path": "sampler/user/cgroup_filter.h",
+      "archive_path": "source/sampler/user/cgroup_filter.h",
+      "sha256": "eeb0886d97fba1caf2e010eb0df9bc038db1eb84c8e6e47a09764e94ad1cf7ad"
+    },
+    {
+      "path": "sampler/user/CMakeLists.txt",
+      "archive_path": "source/sampler/user/CMakeLists.txt",
+      "sha256": "8bb7e0f074a02449665fb9a4ef1fc88c32b65f990f304a0adc2d08edfa3303ea"
+    },
+    {
+      "path": "sampler/user/README.md",
+      "archive_path": "source/sampler/user/README.md",
+      "sha256": "7b1335a70037790666ea3b42807567d925d320855233e6bad5b9172b493bf4df"
+    },
+    {
+      "path": "sampler/user/sampler_container.sh",
+      "archive_path": "source/sampler/user/sampler_container.sh",
+      "sha256": "42fd45e191f7e33197d0243f33ecc9fd2a90dcb5814328bbdc787c5f55f08bd1"
+    },
+    {
+      "path": "sampler/user/sampler_trace_ext.cpp",
+      "archive_path": "source/sampler/user/sampler_trace_ext.cpp",
+      "sha256": "e3d75fbae73b62b8d3ce62f2d8d3fdbf29c128df5e13009ca45389bdae9504be"
+    },
+    {
+      "path": "scripts/apply_hints_to_image.sh",
+      "archive_path": "source/scripts/apply_hints_to_image.sh",
+      "sha256": "b30258e4af9e8740378268014c08e94b49cf4c36fad8a913afafbe0f16996a51"
+    },
+    {
+      "path": "scripts/check_env.sh",
+      "archive_path": "source/scripts/check_env.sh",
+      "sha256": "7f487d81f1c396cb2ef6d1963424cfafa4630f6bde3c09920c35012572efc70a"
+    },
+    {
+      "path": "scripts/ci_local.sh",
+      "archive_path": "source/scripts/ci_local.sh",
+      "sha256": "4cb55b13f21fea4f64610d5604ab00fef7e9ee860555b621a79d9f6cfb0ced2e"
+    },
+    {
+      "path": "scripts/coldstart_bench_strict.sh",
+      "archive_path": "source/scripts/coldstart_bench_strict.sh",
+      "sha256": "90fbcd28b44226811fcac0348cef501e12f9f4c2459b5131a7ede040147278fc"
+    },
+    {
+      "path": "scripts/hints_to_estargz_list.py",
+      "archive_path": "source/scripts/hints_to_estargz_list.py",
+      "sha256": "33cb3ca3b63ee88a5c71ad5acf7c45dcbf99428c0d78da70d4a0f0db962caf5d"
+    },
+    {
+      "path": "scripts/oneclick_esgz_optimize_with_llm.sh",
+      "archive_path": "source/scripts/oneclick_esgz_optimize_with_llm.sh",
+      "sha256": "6805fd5e4a2ba9165ca9a500816f652b01ad593a80f3f395eb5b2aa88adc5529"
+    },
+    {
+      "path": "scripts/oneclick_product.py",
+      "archive_path": "source/scripts/oneclick_product.py",
+      "sha256": "415e9d977729f4928db5dae3331e30bd523301a4d6bc81a4fecb2109df02db07"
+    },
+    {
+      "path": "tests/test_apply_hints_script.py",
+      "archive_path": "source/tests/test_apply_hints_script.py",
+      "sha256": "59079b232af7da7e9f17a5cc2d65bc088d40e0641f68ceeee0cdb69eaaf6817f"
+    },
+    {
+      "path": "tests/test_build_llm_prompt.py",
+      "archive_path": "source/tests/test_build_llm_prompt.py",
+      "sha256": "4d1b014fad6e0985210ee9f37380c2f041c04e72b36f76449e91a0a00780b4dc"
+    },
+    {
+      "path": "tests/test_check_env.py",
+      "archive_path": "source/tests/test_check_env.py",
+      "sha256": "9da77ed4a9ece4783d37beaf7a31223accff4d7d5785832069e4cf36d9e7c086"
+    },
+    {
+      "path": "tests/test_coldstart_bench_script.py",
+      "archive_path": "source/tests/test_coldstart_bench_script.py",
+      "sha256": "9be8bd169756c8f08dc898f36ee12351fe5e2bed9340655f9be4c51bd741bdfb"
+    },
+    {
+      "path": "tests/test_llm_provider_config.py",
+      "archive_path": "source/tests/test_llm_provider_config.py",
+      "sha256": "e1631022c6a79794a848dd29a56df8d8570ace36adca729472c6f384f1e66c3b"
+    },
+    {
+      "path": "tests/test_llm_provider_mock.py",
+      "archive_path": "source/tests/test_llm_provider_mock.py",
+      "sha256": "f71f6909a7b66316bacb0d81fa8470eef7ccd17bb0f7f526c58bf5795651b573"
+    },
+    {
+      "path": "tests/test_llm_provider_parsing.py",
+      "archive_path": "source/tests/test_llm_provider_parsing.py",
+      "sha256": "f2a7a6cf129d5dfe5979ec0680dde326863106fc0bb7519b8bae89372bcb71cb"
+    },
+    {
+      "path": "tests/test_oneclick_product_cli.py",
+      "archive_path": "source/tests/test_oneclick_product_cli.py",
+      "sha256": "a183535213bdff666341bc7d604cd262fbeb4f7f4cb8d19a4e6c997163983e47"
+    },
+    {
+      "path": "tests/test_oneclick_shell.py",
+      "archive_path": "source/tests/test_oneclick_shell.py",
+      "sha256": "7b018ff5d2d69ab71e03115af236b1349cb105bdcfd1f08d8e6bcdd524aac6d6"
+    },
+    {
+      "path": "tests/test_orchestrator_analyze.py",
+      "archive_path": "source/tests/test_orchestrator_analyze.py",
+      "sha256": "92704ea4dccc25274d84c7f7ce3f9c5a9852bcca62d0acecd44e9fc4752dd195"
+    },
+    {
+      "path": "tests/test_orchestrator_apply.py",
+      "archive_path": "source/tests/test_orchestrator_apply.py",
+      "sha256": "5fcc57f4663b80b8a27931116918be76ab560cce1da0fe26046b27a4d889137e"
+    },
+    {
+      "path": "tests/test_orchestrator_benchmark.py",
+      "archive_path": "source/tests/test_orchestrator_benchmark.py",
+      "sha256": "846bddc042e7983ee84b2f7c361180e6abc5a8ad268a5bf8359e1e85d758dd6b"
+    },
+    {
+      "path": "tests/test_orchestrator_envcheck.py",
+      "archive_path": "source/tests/test_orchestrator_envcheck.py",
+      "sha256": "a3773f0833dad62f74a82d7312264e30746266879b4cb4ad9365ef73448bd1a5"
+    },
+    {
+      "path": "tests/test_orchestrator_export_enrich.py",
+      "archive_path": "source/tests/test_orchestrator_export_enrich.py",
+      "sha256": "74e100a629bdbef39c8ba10d423dd1942f3c0a14c9b9951875f8325a81d10be2"
+    },
+    {
+      "path": "tests/test_orchestrator_llm_optimize.py",
+      "archive_path": "source/tests/test_orchestrator_llm_optimize.py",
+      "sha256": "460f4de18fd13291869de3b42fd1c1e19b796d24956b72e40df456cb532788fd"
+    },
+    {
+      "path": "tests/test_orchestrator_preflight.py",
+      "archive_path": "source/tests/test_orchestrator_preflight.py",
+      "sha256": "177dae7879c8ca450ef999f94fc2f7dd8624a278ac4c5cf5af40a0eaeea83566"
+    },
+    {
+      "path": "tests/test_orchestrator_publish.py",
+      "archive_path": "source/tests/test_orchestrator_publish.py",
+      "sha256": "220362c20f52d66120fe835a80022fc944376e9914fe575fc33d578de370eb9a"
+    },
+    {
+      "path": "tests/test_orchestrator_report.py",
+      "archive_path": "source/tests/test_orchestrator_report.py",
+      "sha256": "0675b82629b8b772d5c21a87f7b54f3a3527dba51a23139c8d726a099dc9867e"
+    },
+    {
+      "path": "tests/test_orchestrator_runtime.py",
+      "archive_path": "source/tests/test_orchestrator_runtime.py",
+      "sha256": "2c377494523a30f76d1784ccffd2d530ba4d6a0914dff43964cc727fffda9e33"
+    },
+    {
+      "path": "tests/test_orchestrator_sample.py",
+      "archive_path": "source/tests/test_orchestrator_sample.py",
+      "sha256": "ce343a67fcc8abb6aa74b99c182b0b9a96e17066301984082fdb99c642065d0e"
+    },
+    {
+      "path": "tests/test_orchestrator_workload_execution.py",
+      "archive_path": "source/tests/test_orchestrator_workload_execution.py",
+      "sha256": "cd863c977d1452be51af501c07e456e26cc4edbb10e33fcff4510f103f2725f2"
+    },
+    {
+      "path": "tests/test_orchestrator_workloads.py",
+      "archive_path": "source/tests/test_orchestrator_workloads.py",
+      "sha256": "e4253bc469f5c8a5e4721eaa4ced0c07745af389c35978d261f07e3753827b5d"
+    },
+    {
+      "path": "tests/test_pipeline_tools.py",
+      "archive_path": "source/tests/test_pipeline_tools.py",
+      "sha256": "debc15b5c74c5c4b66287ddc4d2e83cf90d73c0717e61a27753f4987d7df9871"
+    },
+    {
+      "path": "tests/test_prepare_preferred_paths.py",
+      "archive_path": "source/tests/test_prepare_preferred_paths.py",
+      "sha256": "99090a19292b087b625406ac2df5c2ea5be39c4aeaebc5f8f80c01365ae7f32e"
+    },
+    {
+      "path": "provenance/original/tests/test_quality_gate.py",
+      "archive_path": "source/tests/test_quality_gate.py",
+      "sha256": "6f1dc1749d5702cdab7e1c9ed940c9173d0eed2c2edfd6719682501a79e67276",
+      "maintenance_path": "tests/test_quality_gate.py",
+      "maintenance_change": "Use the running Python interpreter for subprocess tests, instead of assuming python3 exists on Windows."
+    },
+    {
+      "path": "tests/test_runtime_integration.py",
+      "archive_path": "source/tests/test_runtime_integration.py",
+      "sha256": "66eb024f30bfe6b874013e5703b199f3e57e9d4c70d6985f2427f03b7861ae4a"
+    }
+  ]
+}

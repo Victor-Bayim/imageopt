@@ -1,0 +1,2 @@
+# Keep restored source and provenance hashes independent of core.autocrlf.
+* -text

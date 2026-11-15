@@ -1,0 +1,8 @@
+# Example run config for the TF Serving EfficientNetV2B0 embedded-model workload.
+# Use this when the image already contains the model under
+# /models/efficientnet_v2_b0 and no host bind mount is needed.
+
+preset: tf-serving-efficientnet-v2-b0
+apply: true
+benchmark: true
+bench_runs: 3

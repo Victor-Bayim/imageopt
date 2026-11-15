@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-15",
+  "platform": "Windows",
+  "python": "3.12.14",
+  "python_syntax_files": 86,
+  "portable_tests": 74,
+  "portable_failures": 0,
+  "portable_errors": 0,
+  "selector_demo": "passed",
+  "historical_records": "recalculated: 9 observations, independent batches",
+  "original_source_hashes": 160,
+  "not_run": [
+    "Linux native/BPF compilation",
+    "containerd/stargz full workflow",
+    "new cold-start performance",
+    "online LLM API"
+  ]
+}

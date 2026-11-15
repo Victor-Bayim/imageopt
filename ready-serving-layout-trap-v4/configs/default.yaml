@@ -1,0 +1,6 @@
+service:
+  name: ready-serving-layout-trap-v4
+  listen_addr: 0.0.0.0:8000
+bootstrap:
+  read_buffer_bytes: 262144
+  startup_plan_path: /srv/control/startup_plan.json

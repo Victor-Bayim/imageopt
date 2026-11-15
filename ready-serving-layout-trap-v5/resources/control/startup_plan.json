@@ -1,0 +1,40 @@
+{
+  "hot_paths": [
+    "/srv/layout/slot_000064_hot_000.bin",
+    "/srv/layout/slot_000129_hot_001.bin",
+    "/srv/layout/slot_000194_hot_002.bin",
+    "/srv/layout/slot_000259_hot_003.bin",
+    "/srv/layout/slot_000324_hot_004.bin",
+    "/srv/layout/slot_000389_hot_005.bin",
+    "/srv/layout/slot_000454_hot_006.bin",
+    "/srv/layout/slot_000519_hot_007.bin",
+    "/srv/layout/slot_000584_hot_008.bin",
+    "/srv/layout/slot_000649_hot_009.bin",
+    "/srv/layout/slot_000714_hot_010.bin",
+    "/srv/layout/slot_000779_hot_011.bin",
+    "/srv/layout/slot_000844_hot_012.bin",
+    "/srv/layout/slot_000909_hot_013.bin",
+    "/srv/layout/slot_000974_hot_014.bin",
+    "/srv/layout/slot_001039_hot_015.bin",
+    "/srv/layout/slot_001104_hot_016.bin",
+    "/srv/layout/slot_001169_hot_017.bin",
+    "/srv/layout/slot_001234_hot_018.bin",
+    "/srv/layout/slot_001299_hot_019.bin",
+    "/srv/layout/slot_001364_hot_020.bin",
+    "/srv/layout/slot_001429_hot_021.bin",
+    "/srv/layout/slot_001494_hot_022.bin",
+    "/srv/layout/slot_001559_hot_023.bin",
+    "/srv/layout/slot_001624_hot_024.bin",
+    "/srv/layout/slot_001689_hot_025.bin",
+    "/srv/layout/slot_001754_hot_026.bin",
+    "/srv/layout/slot_001819_hot_027.bin",
+    "/srv/layout/slot_001884_hot_028.bin",
+    "/srv/layout/slot_001949_hot_029.bin",
+    "/srv/layout/slot_002014_hot_030.bin",
+    "/srv/layout/slot_002079_hot_031.bin"
+  ],
+  "late_predict_paths": [
+    "/srv/layout/slot_002080_late_000.bin"
+  ],
+  "expected_hot_bytes": 67108864
+}

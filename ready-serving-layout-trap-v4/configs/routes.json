@@ -1,0 +1,7 @@
+{
+  "routes": [
+    {"path": "/ready", "method": "GET"},
+    {"path": "/predict", "method": "POST"},
+    {"path": "/debug/state", "method": "GET"}
+  ]
+}

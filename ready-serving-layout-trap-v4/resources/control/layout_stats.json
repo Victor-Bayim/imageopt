@@ -1,0 +1,15 @@
+{
+  "layout_root": "/srv/layout",
+  "total_entries": 544,
+  "kind_counts": {
+    "hot": 128,
+    "cold": 384,
+    "late": 32
+  },
+  "kind_bytes": {
+    "hot": 268435456,
+    "cold": 1610612736,
+    "late": 134217728
+  },
+  "interleave_pattern": "hot, cold, cold, cold, late every 4th hot group"
+}

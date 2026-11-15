@@ -1,0 +1,6 @@
+.gocache
+.tmp
+bin
+tests/__pycache__
+tools/__pycache__
+*.pyc

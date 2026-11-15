@@ -1,0 +1,12 @@
+{
+  "record_type": "reported_aggregate",
+  "source": "source/docs/EXPERIMENTS.md, section 3",
+  "workload": "ready-serving-layout-trap-v5",
+  "runs_per_group": 3,
+  "statistic": "median",
+  "unoptimized_lazy_ready_ms": 2360,
+  "optimized_lazy_ready_ms": 1677,
+  "reported_improvement_pct": 28.940677966101696,
+  "raw_per_run_records_in_this_package": false,
+  "note": "Aggregate transcribed from the original project experiment report. This is not a reconstruction of per-run samples."
+}

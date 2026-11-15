@@ -1,0 +1,14 @@
+# Example run config for the TF Serving EfficientNetV2B0 external-model workload.
+# Edit model_host for your own machine before use.
+#
+# model_host must point to the host directory that will be mounted as
+# /models/efficientnet_v2_b0 inside the container. The host-side layout should
+# look like:
+#   /abs/path/to/efficientnet_v2_b0/1/saved_model.pb
+#   /abs/path/to/efficientnet_v2_b0/1/variables/...
+
+preset: tf-serving-efficientnet-v2-b0
+model_host: /abs/path/to/efficientnet_v2_b0
+apply: true
+benchmark: true
+bench_runs: 3

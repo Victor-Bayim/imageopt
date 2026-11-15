@@ -1,0 +1,29 @@
+[
+  {
+    "path": "/app/hot.so",
+    "size_bytes": 4096,
+    "weighted_count": 20,
+    "weighted_open_count": 20,
+    "weighted_via_open_count": 20,
+    "weighted_open_with_devino_count": 20,
+    "first_ratio": 0.01,
+    "path_kind": "regular"
+  },
+  {
+    "path": "/app/later.dat",
+    "size_bytes": 1048576,
+    "weighted_count": 2,
+    "weighted_open_count": 2,
+    "weighted_via_open_count": 2,
+    "weighted_open_with_devino_count": 2,
+    "first_ratio": 0.9,
+    "path_kind": "regular"
+  },
+  {
+    "path": "/app/cache",
+    "size_bytes": 4096,
+    "weighted_count": 99,
+    "first_ratio": 0.0,
+    "path_kind": "directory"
+  }
+]
