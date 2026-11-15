@@ -386,8 +386,6 @@ python3 scripts/oneclick_product.py report \
 
 ## 14. 当前 `ready-serving-layout-trap-v5` 主实验的推荐调用
 
-如果要围绕当前主实验整理证据，推荐在 `run` 中显式写全 benchmark 参数：
-
 ```bash
 python3 scripts/oneclick_product.py run <RAW_IMAGE> \
   --work-dir /tmp/layout_trap_v5_run \
@@ -409,7 +407,6 @@ python3 scripts/oneclick_product.py run <RAW_IMAGE> \
 - `tf-serving-half-plus-two`
 
 它们只是 CLI 默认值集合。
-当前正式实验叙述不应把它们写成主结论来源。
 
 当前 workload 选择中包含：
 

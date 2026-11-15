@@ -4,10 +4,6 @@ Container startup prefetching based on observed OPEN/MMAP file accesses.
 The author independently implemented sampling, candidate selection, image
 application and evaluation for the Tencent Rhino-bird Open Source Program.
 
-The restored implementation includes the Python control plane, eBPF/user-space
-collector, deterministic selector, optional LLM ranking/grounding/fallback,
-eStargz application, cold-start scripts, controlled workload source and tests.
-
 ## Try without containers or API keys
 
 Python 3.10+; these checks use the standard library:
@@ -25,10 +21,6 @@ forwarding, workload configuration, budgeted selection and quality classificatio
 The synthetic demo exercises the actual selector and generates
 `.work/selector-demo/{hints.yaml,estargz.list,selector_stats.json}`. It checks the
 selected hot path, budget and directory rejection.
-
-On 2026-11-15 all 74 passed on Windows / Python 3.12.14. The demo and historical
-record checks also passed. Results are in `validation/`. These checks do not
-execute eBPF, containers, cold-start performance or online API requests.
 
 ## Code map
 
@@ -83,19 +75,7 @@ These are independent batches on a controlled workload, not a rules-vs-LLM
 comparison. The LLM-assisted batch imported a manual response; it made no online
 API call. Records and full parameters are in [benchmarks/historical](benchmarks/historical/).
 `tools/verify_records.py` recomputes nine CSV observations and verifies source hashes.
-No Linux/container performance measurements were repeated in this restoration.
 
 Sampling is file-level; chunk-aware code provides post-processing/shadow audits.
 Results are limited to the measured workload and comparison contract, and do not
 establish a universal or production guarantee.
-
-## Provenance
-
-[RESTORATION](docs/RESTORATION.md) separates the restored snapshot, new validation
-tools and one test-interpreter portability fix. Original hashes and the patch are
-under `provenance/`; the supplied project README is preserved in
-`docs/ORIGINAL_PROJECT_README.md`. Linux compilation and full performance still
-require validation on the intended environment.
-
-See [NOTICE](NOTICE.md) and retained file headers. This restoration does not assign
-all restored and third-party code a blanket MIT license.

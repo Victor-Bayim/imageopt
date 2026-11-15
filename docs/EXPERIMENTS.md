@@ -1,11 +1,6 @@
 # Experiments
 
-本文件只记录当前允许写入正式文档的实验事实。
-如果需要历史背景，只能说：历史文档已归档，不作为当前事实依据。
-
 ## 1. 当前主实验
-
-当前正式实验叙述应围绕：
 
 - workload：`ready-serving-layout-trap-v5`
 - benchmark contract：`raw-full-vs-estargz-lazy-triple`
@@ -27,8 +22,6 @@
 - `optimized_median_lazy_ready_ms`
   加 hints 的 eStargz lazy ready 时间
 
-当前正式文档里应把 triple benchmark 解释为：
-
 - baseline 看 full pull ready
 - unoptimized 和 optimized 看 lazy ready
 - 改善百分比以这三组中位数为基础计算
@@ -48,8 +41,6 @@
 
 ## 4. `runs=3` 的保守解读
 
-只根据这组数据，可以做的表述是：
-
 - `baseline_median_full_pull_ready_ms = 453634.0` 对应 `453.634 s`，说明 raw baseline 的完整拉取到 ready 中位时间处于百秒量级。
 - `unoptimized_median_lazy_ready_ms = 2360.0` 对应 `2.360 s`，说明未加 hints 的 eStargz lazy ready 中位时间处于秒级。
 - `optimized_median_lazy_ready_ms = 1677.0` 对应 `1.677 s`，说明在该实验条件下，加 hints 后的 lazy ready 中位时间进一步缩短。
@@ -57,15 +48,7 @@
 - 在该 workload 和该比较合同下，hinted eStargz 的 lazy ready 中位数低于 unoptimized eStargz。
 - 在该 workload 和该比较合同下，hinted eStargz 相比 unoptimized eStargz 的中位数改善为 `28.940677966101696%`。
 
-不应扩展成：
-
-- 对其他 workload 必然成立
-- 对其他镜像必然成立
-- 任何情况下 LLM 或 hinting 都会带来更好结果
-
 ## 5. `runs=1 after advisory fix` 只作 smoke / regression check
-
-下面这组数据只能作为 smoke / regression check，不应写成主结论：
 
 | metric | value |
 | --- | ---: |
@@ -76,13 +59,9 @@
 | optimized_vs_raw_improvement_pct | 99.25511750125203 |
 | optimized_vs_unoptimized_improvement_pct | 53.92156862745098 |
 
-这组数据可以支持的说法只有：
-
 - `baseline_median_full_pull_ready_ms = 157743.0` 对应 `157.743 s`，`unoptimized_median_lazy_ready_ms = 2550.0` 对应 `2.550 s`，`optimized_median_lazy_ready_ms = 1175.0` 对应 `1.175 s`。
 - advisory fix 之后，主实验路径至少还有一次 smoke / regression 结果可用
 - 该 smoke 结果没有推翻 triple benchmark 的方向性观察
-
-这组 `runs=1` 结果不作为新的正式结论。
 
 ## 6. 当前主实验的依据
 
@@ -103,26 +82,7 @@
 - lazy snapshotter 本身的收益
 - hints 对 lazy ready 的额外影响
 
-## 7. 正式实验描述示例
-
-如果需要在报告、论文或摘要中引用当前主实验，可采用如下表述：
-
 > 在 `ready-serving-layout-trap-v5` 场景下，当前主实验使用 `raw-full-vs-estargz-lazy-triple` 比较合同，对 raw full pull baseline、unoptimized eStargz lazy 和 hinted eStargz lazy 三组进行比较。`runs=3` 的中位数结果分别为 `453634.0 ms`、`2360.0 ms` 和 `1677.0 ms`，即 `453.634 s`、`2.360 s` 和 `1.677 s`。在该实验条件下，unoptimized 相对 raw 的改善为 `99.4797568083521%`，optimized 相对 raw 的改善为 `99.6303187150875%`，optimized 相对 unoptimized 的改善为 `28.940677966101696%`。
-
-这个模板有三个要点：
-
-- workload 说清楚
-- comparison mode 说清楚
-- 只把结论限制在当前实验条件内
-
-## 8. 不应写进正式实验文档的内容
-
-以下内容当前不应写进正式实验文档：
-
-- `tf-serving-half-plus-two` 作为当前主实验结论
-- archive 中的旧 benchmark 结果
-- 未经当前源码和测试支撑的旧 CLI 行为
-- 未经你明确提供的数据
 
 ## 9. 复现实验时需要注意的条件
 
@@ -136,11 +96,7 @@
 - optimized image：加 hints 的 eStargz image
 - benchmark runs：主结论使用 `3`
 
-如果只做快速回归检查，可以跑 `runs=1`，但文档和对外叙述仍应以 `runs=3` 为主。
-
 ## 10. 当前实验边界
-
-当前正式实验材料只支持以下保守结论：
 
 - 在 `ready-serving-layout-trap-v5` 上，triple benchmark 已经有主结论数据和 smoke 数据
 - 该结论属于当前 workload、当前镜像组合、当前 benchmark 合同下的观察结果

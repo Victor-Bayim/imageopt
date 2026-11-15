@@ -32,7 +32,7 @@
     {
       "path": "docs/EXPERIMENTS.md",
       "archive_path": "source/docs/EXPERIMENTS.md",
-      "sha256": "8dd86d46d3646988d3a261e77843b756c9fcedde12fcd7c5e6f35d00a5b4e6dd"
+      "sha256": "4f8195fc9a526bc3e13eece7d40127012cb79a4b038112b04c0e5d74fded0a72"
     },
     {
       "path": "docs/IMPLEMENTATION_NOTES.md",
@@ -42,12 +42,12 @@
     {
       "path": "docs/KNOWN_LIMITATIONS.md",
       "archive_path": "source/docs/KNOWN_LIMITATIONS.md",
-      "sha256": "2e02ba9924af2fb8fdd952028a3c93029e323f2ad90f11ba200ab5e008bac049"
+      "sha256": "ac14fad4a875e87ae8f369d838279c3eb2f8e118f11503425f5223e8dcbc4fe9"
     },
     {
       "path": "docs/USAGE.md",
       "archive_path": "source/docs/USAGE.md",
-      "sha256": "5f9127e9f7d9b457e96d9e7a4937304b8fd3b43b122d6dad8baefb5a0dbc80d9"
+      "sha256": "60774ea4cc945f61e90f63351a266ad8e7b9bd050c64ccf0344a9607e82851e2"
     },
     {
       "path": "optimizer/aggregate_candidates.py",

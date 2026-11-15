@@ -12,13 +12,11 @@
 
 - 当前证据集中在 `ready-serving-layout-trap-v5` 主实验路径。
 - 当前结果不应外推到任意 workload。
-- 当前行为不应表述为“稳定适用于所有镜像”。
 
 ## 3. LLM 边界
 
 - LLM 不是必需组件。
 - 当前默认 mode 仍然是 `deterministic`。
-- 当前系统不应表述为“LLM 优于 deterministic”。
 - `llm-auto` 在 provider 不可用、响应不可解析、合同不满足，或 grounding 后未形成可用路径集合时，会回退到 deterministic hints。
 
 ## 4. 合同边界
@@ -51,20 +49,7 @@
 - `chunk-shadow` 目前仍是实验性平行产物。
 - 该模式依赖存在 image TOC 时的后处理审计结果，不改变原始 file-level 采样事实。
 - 它不能替代默认 deterministic file selector 的正式地位。
-- 它更适合作为分析和对照工具，而不是被写成默认主路径。
 
 ## 9. 入口边界
 
 - 当前唯一正式入口是 `scripts/oneclick_product.py`。
-- 其他 shell 脚本仍会被正式 stage 调用，但不应再被写成并列正式入口。
-
-## 10. 叙述边界
-
-下列表述不符合当前实现边界，除非放在明确否定语境里：
-
-- “通用”
-- “稳定适用于所有镜像”
-- “LLM 优于 deterministic”
-- “生产级”
-
-对外文档和论文文本都应避免把当前实现写得比源码和测试支持的范围更大。
