@@ -1,5 +1,3 @@
-**English** | [简体中文](README.zh-CN.md)
-
 # imageopt: eBPF container cold start
 
 eBPF watches OPEN/MMAP inside the container and writes eStargz prefetch hints. Controlled workload, lazy cold start:
