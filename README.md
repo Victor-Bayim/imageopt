@@ -1,3 +1,5 @@
+**English** | [简体中文](README.zh-CN.md)
+
 # imageopt
 
 Container startup prefetching based on observed OPEN/MMAP file accesses.
@@ -26,13 +28,13 @@ selected hot path, budget and directory rejection.
 
 | Concern | Implementation |
 | --- | --- |
-| CLI, stages, resume | [oneclick_product.py](scripts/oneclick_product.py), [manifest.py](orchestrator/manifest.py), [stages](orchestrator/stages/) |
+| CLI, stages, resume | [oneclick_product.py](scripts/oneclick_product.py), [manifest.py](orchestrator/manifest.py), [stages](orchestrator/stages) |
 | Container-scoped OPEN/MMAP | [BPF](sampler/BPF/file_access_ebpf_trace.bpf.c), [collector](sampler/user/sampler_trace_ext.cpp), [ABI](sampler/common/file_event_abi.h) |
 | Enrichment and aggregation | [export/enrich](orchestrator/stages/export_enrich.py), [aggregate_candidates.py](optimizer/aggregate_candidates.py) |
 | Deterministic selection | [selector](optimizer/tools/select_prefetch_paths.py), [quality_gate.py](optimizer/tools/quality_gate.py) |
-| Optional LLM and grounding | [providers](orchestrator/llm_providers/), [llm_optimize](orchestrator/stages/llm_optimize.py), [prepare_preferred_paths.py](optimizer/tools/prepare_preferred_paths.py) |
+| Optional LLM and grounding | [providers](orchestrator/llm_providers), [llm_optimize](orchestrator/stages/llm_optimize.py), [prepare_preferred_paths.py](optimizer/tools/prepare_preferred_paths.py) |
 | Apply and measure | [apply_hints_to_image.sh](scripts/apply_hints_to_image.sh), [coldstart_bench_strict.sh](scripts/coldstart_bench_strict.sh) |
-| Rebuild controlled workload | [ready-serving-layout-trap-v5](ready-serving-layout-trap-v5/) |
+| Rebuild controlled workload | [ready-serving-layout-trap-v5](ready-serving-layout-trap-v5) |
 
 ## Linux workflow
 
@@ -73,7 +75,7 @@ actual host/tool versions for new experiments.
 
 These are independent batches on a controlled workload, not a rules-vs-LLM
 comparison. The LLM-assisted batch imported a manual response; it made no online
-API call. Records and full parameters are in [benchmarks/historical](benchmarks/historical/).
+API call. Records and full parameters are in [benchmarks/historical](benchmarks/historical).
 `tools/verify_records.py` recomputes nine CSV observations and verifies source hashes.
 
 Sampling is file-level; chunk-aware code provides post-processing/shadow audits.

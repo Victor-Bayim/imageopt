@@ -1,45 +1,47 @@
+**English** | [简体中文](IMPLEMENTATION_NOTES.zh-CN.md)
+
 # Implementation Notes
 
-本文件记录当前实现中最关键的收口点。
+This document records the key decisions in the current implementation.
 
-## 1. 事实基础
+## 1. Foundations
 
-当前实现有三个核心原则：
+The implementation follows three principles:
 
-1. 入口统一到 `scripts/oneclick_product.py`
-2. deterministic 是所有 LLM 流程的 baseline
-3. 质量问题优先作为 advisory 写入结构化字段，而不是直接终止流程
+1. Use `scripts/oneclick_product.py` as the single entry point
+2. Use deterministic results as the baseline for every LLM flow
+3. Record quality issues as structured advisories before considering termination
 
-## 2. 采样与后处理边界
+## 2. Sampling and post-processing scope
 
-当前事实来源顺序是：
+The observation pipeline is:
 
 1. `raw_events.jsonl`
 2. `events.jsonl`
 3. `events_enriched.jsonl`
 4. `candidates.json`
-5. selector 与 LLM 后处理产物
+5. Selector and LLM post-processing artifacts
 
-实现上需要区分两件事：
+The implementation distinguishes two responsibilities:
 
-- 采样层只负责收集文件访问事实
-- chunk-aware 逻辑只在存在 image TOC 时，对既有文件路径选择结果的后处理视图里出现
+- Sampling collects file-access observations only
+- Chunk-aware logic appears only in post-processing views of selected file paths when an image TOC exists
 
-这意味着：
+Consequently:
 
-- 采样器本身并不直接产出 layer/chunk 视角的访问事实
-- image TOC 相关逻辑不会改写原始 sample 事实
+- The sampler does not directly produce layer/chunk access observations
+- Image-TOC processing does not rewrite raw sample observations
 
-## 3. analyze 的实现重点
+## 3. Analyze implementation
 
-`run_analyze_stage()` 当前做了四件事：
+`run_analyze_stage()` performs four tasks:
 
-1. 聚合候选
-2. 运行质量审计
-3. 运行 deterministic selector
-4. 在存在 image TOC 时生成附加的 chunk-aware 审计产物
+1. Aggregate candidates
+2. Run quality audits
+3. Run the deterministic selector
+4. Generate additional chunk-aware audit artifacts when an image TOC exists
 
-主要工具链：
+Main tools:
 
 - `optimizer/aggregate_candidates.py`
 - `optimizer/tools/quality_gate.py`
@@ -48,15 +50,15 @@
 - `optimizer/tools/build_toc_shadow.py`
 - `optimizer/tools/build_chunk_selector_shadow.py`
 
-analyze 的核心正式输出仍然是：
+The core analyze outputs remain:
 
 - `hints.yaml`
 - `estargz.list`
 - `selector_stats_hints.json`
 
-## 4. 当前质量 advisory 结构
+## 4. Quality advisory structure
 
-analyze 和 apply 目前都围绕这组字段落地：
+Analyze and apply use these fields:
 
 ```json
 {
@@ -67,176 +69,176 @@ analyze 和 apply 目前都围绕这组字段落地：
 }
 ```
 
-当前实现约束：
+Implementation constraints:
 
-- `warnings` 放质量风险
-- `blockers` 只放真正阻断流程的问题
-- 只要核心产物已经生成且可消费，stage `status` 就应保持 `passed`
-- recommendation 只是建议，不自动替代 stage status
+- `warnings` contains quality risks
+- `blockers` contains only issues that actually block execution
+- Stage `status` remains `passed` if core artifacts exist and are consumable
+- A recommendation is advice and does not automatically replace stage status
 
-## 5. analyze 为什么不再因为低质量直接失败
+## 5. Why low quality no longer immediately fails analyze
 
-当前 `analyze` 的实现把以下情况降级为 advisory：
+Analyze treats these conditions as advisories:
 
-- candidate pool 偏小
-- selected hints 过少或过多
-- quality gate `ok=false` 但仍有可用 hints
-- identity coverage 偏低
-- OPEN identity coverage 偏低
-- mmap via=maps ratio 偏高
+- A small candidate pool
+- Too few or too many selected hints
+- Quality gate `ok=false` while usable hints remain
+- Low identity coverage
+- Low OPEN identity coverage
+- A high mmap via=maps ratio
 - budget boundary trimming
-- forced-first 触发预算压力
+- Budget pressure caused by forced-first selection
 - low-confidence filtering
-- early-onehit share 偏高
+- A high early-onehit share
 
-只有真正没有可用 hints 时，才会进入 blocker 并让 stage fail。
+Only the absence of usable hints becomes a blocker and fails the stage.
 
-## 6. LLM prompt 的当前收口
+## 6. LLM prompt contract
 
-当前 prompt 构造在：
+Prompts are constructed in:
 
 - `optimizer/tools/build_llm_prompt.py`
 - `orchestrator/stages/llm_optimize.py`
 
-对外合同已经收口到 JSON-first：
+The public contract is JSON-first:
 
 ```json
 {"P0":[],"P1":[],"P2":[],"P3":[]}
 ```
 
-当前 prompt 明确禁止：
+The prompt explicitly forbids:
 
 - Markdown
-- 代码块
-- 解释文字
-- 顶层额外字段
-- 非绝对路径
-- 目录
-- 通配符
-- 噪声路径
+- Code fences
+- Explanatory text
+- Extra top-level fields
+- Non-absolute paths
+- Directories
+- Wildcards
+- Noise paths
 
-manual prompt 与 auto prompt 的差别是：
+Manual and automatic prompts differ as follows:
 
-- manual 可以携带更多背景说明
-- auto 更强调严格、保守、只输出 JSON
+- Manual prompts may include more background information
+- Automatic prompts emphasize strict, conservative JSON-only output
 
-但两者最终合同相同。
+Both use the same final contract.
 
-## 7. `legacy YAML` 现在处于什么位置
+## 7. Role of `legacy YAML`
 
-当前 `legacy YAML` 只保留在 manual response 导入兼容层。
+`legacy YAML` remains only in the manual-response import compatibility layer.
 
-实现上：
+Implementation:
 
-- `_load_manual_response_payload()` 会先尝试 JSON
-- JSON 失败后才尝试兼容 YAML
-- `_write_manual_instructions()` 会明确告诉用户优先保存严格 JSON
+- `_load_manual_response_payload()` tries JSON first
+- YAML compatibility is attempted only after JSON parsing fails
+- `_write_manual_instructions()` asks users to save strict JSON first
 
-因此：
+Therefore:
 
-- 正式文档必须写 JSON-first
-- 正式文档应将 JSON 表述为首选合同，YAML 仅作为导入兼容格式
+- The documented contract is JSON-first
+- JSON is the preferred contract; YAML is an import compatibility format only
 
-## 8. grounding 与 fallback 的关系
+## 8. Grounding and fallback
 
-LLM 返回内容不会直接覆盖最终 hints。
-当前实现会先经过 grounding。
+An LLM response does not directly overwrite the final hints.
+The implementation first grounds the response.
 
-grounding 负责过滤：
+Grounding filters:
 
-- 非候选路径
-- 非绝对路径
-- 非 regular candidate
-- 受 guard 约束而被跳过的路径
-- 容器内不存在的路径
-- 重复路径
-- 特殊噪声路径
+- Non-candidate paths
+- Non-absolute paths
+- Non-regular candidates
+- Paths skipped by guards
+- Paths absent inside the container
+- Duplicate paths
+- Special noise paths
 
-当前行为规则：
+Behavior:
 
-- 如果 grounding 后仍有路径，则继续后处理，并把丢弃情况写进 `llm_grounding_audit.json`
-- 如果 grounding 后未形成可用路径集合，则不采用该 LLM 输出，并回退到 deterministic hints
+- If grounded paths remain, continue post-processing and record discards in `llm_grounding_audit.json`
+- If grounding leaves no usable paths, discard the LLM response and fall back to deterministic hints
 
-这一回退行为本身不等于主流程失败；只有最终无法形成可消费的 `hints.yaml` / `estargz.list`，或执行失败、产物缺失、产物不可消费时，相关阶段才失败。
+Fallback itself does not fail the pipeline. Failure occurs only when consumable `hints.yaml` / `estargz.list` cannot be produced, execution fails, or artifacts are missing or unusable.
 
-## 9. `llm-auto` 与 `llm-manual` 的实现差异
+## 9. Implementation differences between `llm-auto` and `llm-manual`
 
 ### `llm-auto`
 
-- 构造 provider request
-- 读取 API 响应
-- 结构校验
+- Construct a provider request
+- Read the API response
+- Validate the structure
 - grounding
 - selector
-- 成功则输出 grounded LLM hints
-- 失败则保留 deterministic hints
+- On success, emit grounded LLM hints
+- On failure, retain deterministic hints
 
 ### `llm-manual`
 
-- 导出 `prompt.txt`
-- 导出网页端输入 bundle
-- 在 `run` 场景下把 stage 置为 `paused`
-- 等待 `--manual-response-file` 导回
-- 导回后重复结构校验、grounding、selector
+- Export `prompt.txt`
+- Export the web input bundle
+- Set the stage to `paused` during `run`
+- Wait for import through `--manual-response-file`
+- Repeat structural validation, grounding and selection after import
 
-## 10. apply 的成功条件
+## 10. Apply success criteria
 
-`run_apply_stage()` 当前要求：
+`run_apply_stage()` requires:
 
-- apply helper 返回成功
-- `optimized_image.txt` 存在
-- 文件中有非空目标镜像引用
-- smoke 可消费
+- A successful apply helper exit
+- An existing `optimized_image.txt`
+- A nonempty target image reference in that file
+- Successful smoke consumption
 
-apply 成功后，即使存在以下问题，也仍应是 `passed`：
+After successful apply, these issues still leave the stage `passed`:
 
 - quality gate warning
 - budget trimming
-- grounding 丢弃非法路径但仍有有效结果
+- Grounding discards invalid paths but retains valid results
 - selector filtered low-confidence paths
-- cleaned prefetch list 偏小
+- A small cleaned prefetch list
 
-这些问题只进入：
+These issues populate only:
 
 - `quality_status`
 - `warnings`
 - `recommendation`
 - `blockers`
 
-## 11. apply dry-run 的语义
+## 11. Apply dry-run semantics
 
-当前 dry-run 不生成真实优化镜像。
+Dry-run does not generate a real optimized image.
 
-因此 apply dry-run 的结果合同是：
+Its result contract is:
 
 - `status = passed`
 - `result_kind = dry_run`
 - `quality_status = unknown`
 - `recommendation = review_hints`
-- `blockers` 会说明没有真正产出优化镜像
+- `blockers` explains that no optimized image was actually produced
 
-这不是执行失败，而是有意不产生产物。
+This is an intentional omission of output, rather than an execution failure.
 
-## 12. benchmark 的有效性规则
+## 12. Benchmark validity rules
 
-`benchmark_result.json` 的核心不是只有 CSV 存在，而是：
+`benchmark_result.json` requires more than the presence of a CSV:
 
-- 是否有足够有效样本
-- comparison mode 是否成立
-- lazy path 是否被 full-pull guard 判定为无效
+- Sufficient valid samples
+- A valid comparison mode
+- No invalidation of the lazy path by the full-pull guard
 
-当前 benchmark 会在以下情况下失败：
+Benchmark fails when:
 
-- 所有行都失败
-- baseline 或 optimized 缺少足够成功样本
-- triple benchmark 下三组中任一关键标签缺乏有效结果
-- lazy path 被判定为 full pull，导致比较失效
+- All rows fail
+- Baseline or optimized groups lack sufficient successful samples
+- Any required label in the triple benchmark lacks valid results
+- The lazy path performs a full pull, invalidating the comparison
 
-因此 benchmark 的 `valid=false` 是真正的失败信号，不是 advisory。
+Benchmark `valid=false` is a failure signal, not an advisory.
 
-## 13. triple benchmark 的摘要逻辑
+## 13. Triple benchmark summary
 
-当 comparison mode 为 `raw-full-vs-estargz-lazy-triple` 时，summary 关注：
+For comparison mode `raw-full-vs-estargz-lazy-triple`, the summary uses:
 
 - `baseline_median_full_pull_ready_ms`
 - `unoptimized_median_lazy_ready_ms`
@@ -245,45 +247,45 @@ apply 成功后，即使存在以下问题，也仍应是 `passed`：
 - `optimized_vs_raw_improvement_pct`
 - `optimized_vs_unoptimized_improvement_pct`
 
-report 和 CLI summary 都会按这个三组结构解释结果。
+Both reports and CLI summaries interpret results using these three groups.
 
-## 14. manifest 的暂停/恢复行为
+## 14. Manifest pause/resume behavior
 
-当前 manifest 在加载时会把旧状态 `awaiting_manual_response` 规整为 `paused`。
+Loading the manifest normalizes legacy `awaiting_manual_response` to `paused`.
 
-同时会补齐：
+It also fills in:
 
 - `pause_reason`
 - `resume_inputs.manual_response_file`
 - `resume_command`
 
-并且默认把 manual response format 记录为 `json`。
+The manual response format defaults to `json`.
 
-## 15. report 的职责边界
+## 15. Report responsibilities
 
-`run_report.json` 和 `run_report.md` 不是新计算事实来源，而是汇总层。
+`run_report.json` and `run_report.md` aggregate results rather than create new observations.
 
-它们负责把分散产物收口成：
+They collect distributed artifacts into:
 
 - run overall status
 - stage overview
 - mode / mode result
-- startup backend 选择结果
+- Startup backend selection results
 - analyze quality summary
 - LLM fallback summary
 - apply result summary
 - benchmark comparison summary
 
-当前 report 不会重新定义 benchmark 质量，也不会把 analyze/apply 的 advisory 重新提升成 hard fail。
+Reports neither redefine benchmark quality nor promote analyze/apply advisories to hard failures.
 
-## 16. `chunk-shadow` 的当前定位
+## 16. Role of `chunk-shadow`
 
-`chunk-shadow` selector mode 仍然属于实验性平行产物。
+The `chunk-shadow` selector mode remains an experimental parallel output.
 
-它的意义是：
+It supports:
 
-- 基于 image TOC 对既有文件路径选择结果生成实验性 shadow 对照产物
-- 与默认 file selector 做并排观察
-- 在 apply/benchmark/publish 时允许显式选用这套平行产物
+- Image-TOC-based experimental shadow comparisons of selected file paths
+- Side-by-side inspection against the default file selector
+- Explicit use of parallel artifacts during apply/benchmark/publish
 
-它不会取代默认 deterministic file selector 的正式地位。
+It does not replace the default deterministic file selector.

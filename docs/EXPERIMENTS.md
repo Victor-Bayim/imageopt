@@ -1,34 +1,36 @@
+**English** | [简体中文](EXPERIMENTS.zh-CN.md)
+
 # Experiments
 
-## 1. 当前主实验
+## 1. Main experiment
 
 - workload：`ready-serving-layout-trap-v5`
 - benchmark contract：`raw-full-vs-estargz-lazy-triple`
 
-三组比较对象固定为：
+The three comparison groups are fixed:
 
 1. raw full pull baseline
 2. unoptimized eStargz lazy
 3. hinted eStargz lazy
 
-## 2. 指标语义
+## 2. Metric semantics
 
-当前主实验关注三类 ready 指标：
+The main experiment uses three readiness metrics:
 
 - `baseline_median_full_pull_ready_ms`
-  raw baseline 从拉取到 ready 的完整时间
+  Complete time from pulling the raw baseline to readiness
 - `unoptimized_median_lazy_ready_ms`
-  未加 hints 的 eStargz lazy ready 时间
+  eStargz lazy readiness time without hints
 - `optimized_median_lazy_ready_ms`
-  加 hints 的 eStargz lazy ready 时间
+  eStargz lazy readiness time with hints
 
-- baseline 看 full pull ready
-- unoptimized 和 optimized 看 lazy ready
-- 改善百分比以这三组中位数为基础计算
+- Baseline measures full-pull readiness
+- Unoptimized and optimized groups measure lazy readiness
+- Improvement percentages are computed from the three medians
 
-## 3. 主要结论只使用 `runs=3`
+## 3. Main conclusions use `runs=3`
 
-当前主结论必须使用下面这组 `runs=3` 数据：
+The main conclusions use this `runs=3` dataset:
 
 | metric | value |
 | --- | ---: |
@@ -39,16 +41,16 @@
 | optimized_vs_raw_improvement_pct | 99.6303187150875 |
 | optimized_vs_unoptimized_improvement_pct | 28.940677966101696 |
 
-## 4. `runs=3` 的保守解读
+## 4. Interpreting `runs=3`
 
-- `baseline_median_full_pull_ready_ms = 453634.0` 对应 `453.634 s`，说明 raw baseline 的完整拉取到 ready 中位时间处于百秒量级。
-- `unoptimized_median_lazy_ready_ms = 2360.0` 对应 `2.360 s`，说明未加 hints 的 eStargz lazy ready 中位时间处于秒级。
-- `optimized_median_lazy_ready_ms = 1677.0` 对应 `1.677 s`，说明在该实验条件下，加 hints 后的 lazy ready 中位时间进一步缩短。
-- 在该 workload 和该比较合同下，lazy eStargz 相比 raw full pull 的 ready 时间缩短非常明显。
-- 在该 workload 和该比较合同下，hinted eStargz 的 lazy ready 中位数低于 unoptimized eStargz。
-- 在该 workload 和该比较合同下，hinted eStargz 相比 unoptimized eStargz 的中位数改善为 `28.940677966101696%`。
+- `baseline_median_full_pull_ready_ms = 453634.0` equals `453.634 s`: median raw full-pull readiness is on the order of hundreds of seconds.
+- `unoptimized_median_lazy_ready_ms = 2360.0` equals `2.360 s`: unhinted eStargz median lazy readiness is on the order of seconds.
+- `optimized_median_lazy_ready_ms = 1677.0` equals `1.677 s`: hints further reduce median lazy readiness under these conditions.
+- For this workload and comparison contract, lazy eStargz substantially reduces readiness time relative to raw full pull.
+- For this workload and contract, hinted eStargz has lower median lazy readiness than unoptimized eStargz.
+- For this workload and contract, the median improvement of hinted over unoptimized eStargz is `28.940677966101696%`.
 
-## 5. `runs=1 after advisory fix` 只作 smoke / regression check
+## 5. `runs=1 after advisory fix` is a smoke/regression check only
 
 | metric | value |
 | --- | ---: |
@@ -59,45 +61,45 @@
 | optimized_vs_raw_improvement_pct | 99.25511750125203 |
 | optimized_vs_unoptimized_improvement_pct | 53.92156862745098 |
 
-- `baseline_median_full_pull_ready_ms = 157743.0` 对应 `157.743 s`，`unoptimized_median_lazy_ready_ms = 2550.0` 对应 `2.550 s`，`optimized_median_lazy_ready_ms = 1175.0` 对应 `1.175 s`。
-- advisory fix 之后，主实验路径至少还有一次 smoke / regression 结果可用
-- 该 smoke 结果没有推翻 triple benchmark 的方向性观察
+- `baseline_median_full_pull_ready_ms = 157743.0` equals `157.743 s`, `unoptimized_median_lazy_ready_ms = 2550.0` equals `2.550 s`, and `optimized_median_lazy_ready_ms = 1175.0` equals `1.175 s`.
+- At least one smoke/regression result is available for the main experiment after the advisory fix
+- This smoke result does not reverse the directional observation from the triple benchmark
 
-## 6. 当前主实验的依据
+## 6. Basis of the main experiment
 
-当前源码和测试都明确支持：
+The current source and tests support:
 
 - `ready-serving-layout-trap-v5` workload
 - `raw-full-vs-estargz-lazy-triple` comparison mode
-- direct `benchmark` 和 `run --benchmark` 两种触发路径
+- Both direct `benchmark` and `run --benchmark` execution
 
-三组比较正好覆盖：
+The three groups cover:
 
-- raw baseline 的完整拉取代价
-- 未加 hints 的 lazy baseline
-- 加 hints 之后的 lazy 结果
+- The complete pull cost of the raw baseline
+- A lazy baseline without hints
+- Lazy results with hints
 
-这比只做两组对比更能区分：
+The three-way comparison distinguishes:
 
-- lazy snapshotter 本身的收益
-- hints 对 lazy ready 的额外影响
+- Benefits of the lazy snapshotter itself
+- The additional effect of hints on lazy readiness
 
-> 在 `ready-serving-layout-trap-v5` 场景下，当前主实验使用 `raw-full-vs-estargz-lazy-triple` 比较合同，对 raw full pull baseline、unoptimized eStargz lazy 和 hinted eStargz lazy 三组进行比较。`runs=3` 的中位数结果分别为 `453634.0 ms`、`2360.0 ms` 和 `1677.0 ms`，即 `453.634 s`、`2.360 s` 和 `1.677 s`。在该实验条件下，unoptimized 相对 raw 的改善为 `99.4797568083521%`，optimized 相对 raw 的改善为 `99.6303187150875%`，optimized 相对 unoptimized 的改善为 `28.940677966101696%`。
+> For `ready-serving-layout-trap-v5`, the main experiment uses `raw-full-vs-estargz-lazy-triple` to compare raw full pull baseline, unoptimized eStargz lazy and hinted eStargz lazy. With `runs=3`, medians are `453634.0 ms`, `2360.0 ms` and `1677.0 ms`, or `453.634 s`, `2.360 s` and `1.677 s`. Under these conditions, improvement is `99.4797568083521%` for unoptimized versus raw, `99.6303187150875%` for optimized versus raw, and `28.940677966101696%` for optimized versus unoptimized.
 
-## 9. 复现实验时需要注意的条件
+## 9. Reproduction conditions
 
-如果要复现当前主实验，应明确：
+Specify the following when reproducing the main experiment:
 
 - workload：`ready-serving-layout-trap-v5`
 - mode：`ready`
 - comparison mode：`raw-full-vs-estargz-lazy-triple`
 - baseline image：raw baseline image
-- unoptimized image：未加 hints 的 eStargz image
-- optimized image：加 hints 的 eStargz image
-- benchmark runs：主结论使用 `3`
+- unoptimized image: eStargz image without hints
+- optimized image: eStargz image with hints
+- benchmark runs: `3` for the main conclusions
 
-## 10. 当前实验边界
+## 10. Experiment scope
 
-- 在 `ready-serving-layout-trap-v5` 上，triple benchmark 已经有主结论数据和 smoke 数据
-- 该结论属于当前 workload、当前镜像组合、当前 benchmark 合同下的观察结果
-- 后续若要扩展实验面，需要新增当前源码、测试和验证命令都能支撑的新证据
+- Main-result and smoke datasets are available for the `ready-serving-layout-trap-v5` triple benchmark
+- These observations apply to the current workload, image combination and benchmark contract
+- Broader experiments require new evidence supported by source, tests and verification commands

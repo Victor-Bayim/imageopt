@@ -1,55 +1,57 @@
+**English** | [简体中文](KNOWN_LIMITATIONS.zh-CN.md)
+
 # Known Limitations
 
-本文件只列当前源码和测试仍然支持的边界。
+This document lists the scope supported by the current source and tests.
 
-## 1. 采样边界
+## 1. Sampling scope
 
-- 当前采样仍然是文件级事实采集。
-- image TOC、TOC shadow、chunk shadow 只在存在 image TOC 时出现在后处理和报告层。
-- 当前实现不属于按 chunk 的直接采样。
+- Sampling remains file-level observation collection.
+- Image TOC, TOC shadow and chunk shadow appear only in post-processing/reporting when an image TOC is available.
+- The implementation does not directly sample chunks.
 
-## 2. 适用范围边界
+## 2. Applicability
 
-- 当前证据集中在 `ready-serving-layout-trap-v5` 主实验路径。
-- 当前结果不应外推到任意 workload。
+- Current evidence focuses on the `ready-serving-layout-trap-v5` main experiment.
+- Results do not generalize to arbitrary workloads.
 
-## 3. LLM 边界
+## 3. LLM scope
 
-- LLM 不是必需组件。
-- 当前默认 mode 仍然是 `deterministic`。
-- `llm-auto` 在 provider 不可用、响应不可解析、合同不满足，或 grounding 后未形成可用路径集合时，会回退到 deterministic hints。
+- An LLM is optional.
+- The default mode remains `deterministic`.
+- `llm-auto` falls back to deterministic hints when the provider is unavailable, the response is unparseable or violates the contract, or grounding leaves no usable paths.
 
-## 4. 合同边界
+## 4. Contract scope
 
-- 当前正式 LLM 合同是严格 JSON。
-- `legacy YAML` 只作为 manual response 导入兼容存在。
-- 默认 manual response 文件名仍可能保留 `.yaml` 后缀，但这不表示 YAML 是正式首选合同。
+- The LLM contract is strict JSON.
+- `legacy YAML` exists only for manual-response import compatibility.
+- The default manual-response filename may still end in `.yaml`; this does not make YAML the preferred contract.
 
-## 5. 平台边界
+## 5. Platform scope
 
-- 当前产品策略只覆盖 Linux 单机。
-- 运行时前提是 `containerd + nerdctl`。
-- 当前前提是 `root` 或免密 `sudo`。
+- The product policy supports a single Linux host only.
+- Runtime prerequisites are `containerd + nerdctl`.
+- `root` or passwordless `sudo` is required.
 
-## 6. 质量语义边界
+## 6. Quality semantics
 
-- analyze/apply 的质量问题现在优先作为 advisory 处理。
-- `quality_status=warning` 或 `poor` 不自动等于 stage `failed`。
-- LLM 输出在 grounding 后未形成可用路径集合时，当前实现不会采用该结果，而是保留 deterministic hints。
-- 只有最终无法形成可消费的 `hints.yaml` / `estargz.list`，或执行失败、产物缺失、产物不可消费、benchmark 无有效结果等情况，相关阶段才会失败。
+- Analyze/apply quality issues are primarily handled as advisories.
+- `quality_status=warning` or `poor` does not automatically mean stage `failed`.
+- If grounding leaves no usable LLM paths, retain deterministic hints instead.
+- Stages fail only when consumable `hints.yaml` / `estargz.list` cannot be produced, execution fails, artifacts are missing/unusable, or benchmark results are invalid.
 
-## 7. benchmark 边界
+## 7. Benchmark scope
 
-- 当前主结论只应使用 `ready-serving-layout-trap-v5` 的 triple benchmark。
-- `runs=1 after advisory fix` 只能当作 smoke / regression check。
-- lazy benchmark 受 full-pull guard 约束；guard 判定无效时，benchmark 应直接失败，而不是继续报告性能对比。
+- Main conclusions use the `ready-serving-layout-trap-v5` triple benchmark.
+- `runs=1 after advisory fix` is a smoke/regression check only.
+- Lazy benchmarks use a full-pull guard; invalidation fails the benchmark rather than reporting a performance comparison.
 
-## 8. `chunk-shadow` 边界
+## 8. `chunk-shadow` scope
 
-- `chunk-shadow` 目前仍是实验性平行产物。
-- 该模式依赖存在 image TOC 时的后处理审计结果，不改变原始 file-level 采样事实。
-- 它不能替代默认 deterministic file selector 的正式地位。
+- `chunk-shadow` remains an experimental parallel output.
+- It uses post-processing audits with an image TOC and does not change the original file-level observations.
+- It does not replace the default deterministic file selector.
 
-## 9. 入口边界
+## 9. Entry point
 
-- 当前唯一正式入口是 `scripts/oneclick_product.py`。
+- The sole supported entry point is `scripts/oneclick_product.py`.

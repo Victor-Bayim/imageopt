@@ -1,14 +1,16 @@
+**English** | [简体中文](USAGE.zh-CN.md)
+
 # Usage
 
-本文件只覆盖当前 `scripts/oneclick_product.py` 的正式用法。
+This document covers the supported usage of `scripts/oneclick_product.py`.
 
-## 1. 唯一正式入口
+## 1. Single entry point
 
 ```bash
 python3 scripts/oneclick_product.py <subcommand> ...
 ```
 
-正式子命令包括：
+Supported subcommands:
 
 - `preflight`
 - `sample`
@@ -21,30 +23,30 @@ python3 scripts/oneclick_product.py <subcommand> ...
 - `report`
 - `run`
 
-最常用的是 `run` 和 `report`。
+The most common commands are `run` and `report`.
 
 ## 2. `work-dir`
 
-所有正式 stage 都围绕一个 `work-dir` 工作。
+All supported stages operate within one `work-dir`.
 
-如果没有显式传入，默认目录类似：
+Without an explicit path, the default directory resembles:
 
 ```text
 optimizer/work/<timestamp>
 ```
 
-`work-dir` 中通常会保留：
+A `work-dir` normally retains:
 
 - `manifest.json`
-- 各 stage 的 JSON 产物
+- JSON artifacts from each stage
 - `hints.yaml`
 - `estargz.list`
 - `run_report.json`
 - `run_report.md`
 
-## 3. 最常见的命令
+## 3. Common commands
 
-### 最小 deterministic 基线
+### Minimal deterministic baseline
 
 ```bash
 python3 scripts/oneclick_product.py run <IMAGE> \
@@ -52,14 +54,14 @@ python3 scripts/oneclick_product.py run <IMAGE> \
   --mode deterministic
 ```
 
-### 跑完后单独生成报告
+### Generate a report after execution
 
 ```bash
 python3 scripts/oneclick_product.py report \
   --work-dir /tmp/imageopt_run
 ```
 
-### 分阶段执行
+### Execute individual stages
 
 ```bash
 python3 scripts/oneclick_product.py preflight <IMAGE> --work-dir /tmp/imageopt_stage
@@ -69,23 +71,23 @@ python3 scripts/oneclick_product.py analyze --work-dir /tmp/imageopt_stage
 python3 scripts/oneclick_product.py report --work-dir /tmp/imageopt_stage
 ```
 
-## 4. `run` 的参数优先级
+## 4. Parameter precedence for `run`
 
-`run` 支持 `--config` 与 `--preset`。
-当前优先级固定为：
+`run` supports `--config` and `--preset`.
+Precedence is fixed:
 
 ```text
 CLI explicit args > config > preset > built-in defaults
 ```
 
-注意：
+Notes:
 
-- `preset` 只提供默认值
-- `config` 也只提供默认值
-- 它们不会隐式启用 `--apply` 或 `--benchmark`
-- 显式 CLI 参数永远优先
+- `preset` supplies defaults only
+- `config` also supplies defaults only
+- Neither implicitly enables `--apply` or `--benchmark`
+- Explicit CLI arguments always take precedence
 
-## 5. 当前 mode
+## 5. Modes
 
 ### `deterministic`
 
@@ -95,10 +97,10 @@ python3 scripts/oneclick_product.py run <IMAGE> \
   --mode deterministic
 ```
 
-特点：
+Characteristics:
 
-- 不进入 LLM stage
-- 直接消费 analyze 产出的 deterministic hints
+- Skips the LLM stage
+- Directly consumes deterministic hints from analyze
 
 ### `llm-auto`
 
@@ -109,12 +111,12 @@ python3 scripts/oneclick_product.py run <IMAGE> \
   --llm-provider openai
 ```
 
-特点：
+Characteristics:
 
-- 需要有效 provider 配置
-- `run --mode llm-auto` 在缺少 API key 时会报错
-- 当 LLM 输出不可用，或在 grounding 后未形成可用路径集合时，系统会保留 deterministic hints
-- 不会自动切成手工网页导入
+- Requires valid provider configuration
+- `run --mode llm-auto` reports an error if the API key is missing
+- Retains deterministic hints when LLM output is unusable or grounding leaves no usable paths
+- Does not automatically switch to manual web import
 
 ### `llm-manual`
 
@@ -124,15 +126,15 @@ python3 scripts/oneclick_product.py run <IMAGE> \
   --mode llm-manual
 ```
 
-特点：
+Characteristics:
 
-- 会暂停在 manual web flow
-- 输出 prompt bundle
-- 等待用户导回手工响应
+- Pauses in the manual web flow
+- Exports a prompt bundle
+- Waits for the user to import a manual response
 
-## 6. `llm-manual` 当前流程
+## 6. `llm-manual` workflow
 
-### 导出网页端输入
+### Export web input
 
 ```bash
 python3 scripts/oneclick_product.py run <IMAGE> \
@@ -140,16 +142,16 @@ python3 scripts/oneclick_product.py run <IMAGE> \
   --mode llm-manual
 ```
 
-输出中会提示：
+Output identifies:
 
 - `web_llm_ready_to_paste.txt`
 - `llm_manual_instructions.md`
 - `resume_manual_web_llm.sh`
 
-### 导回网页端响应
+### Import the web response
 
-当前合同是 JSON-first。
-推荐导回命令：
+The contract is JSON-first.
+Recommended import command:
 
 ```bash
 python3 scripts/oneclick_product.py llm-optimize \
@@ -157,47 +159,47 @@ python3 scripts/oneclick_product.py llm-optimize \
   --manual-response-file /tmp/run_manual/hints_raw.manual.yaml
 ```
 
-注意：
+Notes:
 
-- 默认文件名仍然是 `hints_raw.manual.yaml`
-- 但内容应该优先保存成严格 JSON
-- 如果内容不是 JSON，系统会尝试兼容旧 YAML
+- The default filename remains `hints_raw.manual.yaml`
+- Prefer saving strict JSON as its content
+- Non-JSON content triggers legacy YAML compatibility parsing
 
-当前唯一允许的顶层结构：
+The only allowed top-level structure is:
 
 ```json
 {"P0":[],"P1":[],"P2":[],"P3":[]}
 ```
 
-要求：
+Requirements:
 
-- 只允许顶层 `P0/P1/P2/P3`
-- 数组元素必须是绝对文件路径
-- 路径必须来自候选列表
-- 不允许 Markdown、解释、代码块、目录、通配符
+- Only top-level `P0/P1/P2/P3` keys are allowed
+- Array elements must be absolute file paths
+- Paths must come from the candidate list
+- Markdown, explanations, code fences, directories and wildcards are forbidden
 
-## 7. `run` 与独立子命令的关系
+## 7. `run` and standalone subcommands
 
-`run` 会自动串联：
+`run` connects these stages automatically:
 
 1. `preflight`
 2. `sample`
 3. `export-enrich`
 4. `analyze`
-5. `llm-optimize`，仅在 `llm-auto` 或 `llm-manual`
-6. `apply`，仅在显式 `--apply`
-7. `benchmark`，仅在显式 `--benchmark`
+5. `llm-optimize`, only in `llm-auto` or `llm-manual`
+6. `apply`, only with explicit `--apply`
+7. `benchmark`, only with explicit `--benchmark`
 8. `report`
 
-独立子命令适合：
+Standalone subcommands are useful for:
 
-- 调试单个 stage
-- 重跑失败阶段
-- 在现有 `work-dir` 上手工继续
+- Debugging one stage
+- Rerunning a failed stage
+- Continuing manually in an existing `work-dir`
 
 ## 8. `sample`
 
-示例：
+Example:
 
 ```bash
 python3 scripts/oneclick_product.py sample <IMAGE> \
@@ -205,7 +207,7 @@ python3 scripts/oneclick_product.py sample <IMAGE> \
   --workload ready-serving-layout-trap-v5
 ```
 
-常用参数：
+Common parameters:
 
 - `--startup-mode auto|legacy|gated`
 - `--startup-backend-preference auto|prefer-host-launcher|prefer-image-shell`
@@ -219,7 +221,7 @@ python3 scripts/oneclick_product.py sample <IMAGE> \
 - `--model-dst`
 - `--model-name`
 
-容器运行时参数也可直接透传：
+Container runtime parameters can also be forwarded directly:
 
 - `--container-gpus`
 - `--container-ipc`
@@ -230,14 +232,14 @@ python3 scripts/oneclick_product.py sample <IMAGE> \
 
 ## 9. `analyze`
 
-示例：
+Example:
 
 ```bash
 python3 scripts/oneclick_product.py analyze \
   --work-dir /tmp/sample_only
 ```
 
-常用参数：
+Common parameters:
 
 - `--min-events`
 - `--max-mmap-maps-ratio`
@@ -250,13 +252,13 @@ python3 scripts/oneclick_product.py analyze \
 - `--early-onehit-max-size-kb`
 - `--selector-mode file|chunk-shadow`
 
-当前 `--allow-low-fidelity` 只是保留的兼容开关。
-低质量发现现在默认写进 advisory 字段，而不是直接停止 analyze。
-`chunk-shadow` 为基于 image TOC 的实验性 shadow 对照模式，不改变 file-level 采样事实来源，也不是默认主路径。
+`--allow-low-fidelity` remains a compatibility switch only.
+Low-quality findings now populate advisory fields by default rather than stopping analyze immediately.
+`chunk-shadow` is an experimental image-TOC-based shadow comparison; it neither changes file-level observations nor becomes the default path.
 
 ## 10. `llm-optimize`
 
-直接运行 LLM stage：
+Run the LLM stage directly:
 
 ```bash
 python3 scripts/oneclick_product.py llm-optimize \
@@ -264,7 +266,7 @@ python3 scripts/oneclick_product.py llm-optimize \
   --llm-provider openai
 ```
 
-手工网页导出：
+Manual web export:
 
 ```bash
 python3 scripts/oneclick_product.py llm-optimize \
@@ -272,7 +274,7 @@ python3 scripts/oneclick_product.py llm-optimize \
   --manual-web
 ```
 
-手工网页导入：
+Manual web import:
 
 ```bash
 python3 scripts/oneclick_product.py llm-optimize \
@@ -280,11 +282,11 @@ python3 scripts/oneclick_product.py llm-optimize \
   --manual-response-file /tmp/run_after_analyze/hints_raw.manual.yaml
 ```
 
-如果导入结果在 grounding 后未形成可用路径集合，当前实现不会采用该 LLM 输出，而是保留 deterministic hints；这一情况本身不等于整个主流程失败。
+If grounding leaves no usable imported paths, the implementation discards the LLM response and retains deterministic hints; this alone does not fail the whole pipeline.
 
 ## 11. `apply`
 
-示例：
+Example:
 
 ```bash
 python3 scripts/oneclick_product.py apply \
@@ -293,18 +295,18 @@ python3 scripts/oneclick_product.py apply \
   --dst-image <OPT_IMAGE>
 ```
 
-如果不传 `--dst-image`，在 `run --apply` 中会自动生成：
+Without `--dst-image`, `run --apply` generates:
 
 - `<src-tag>-optimized`
-- 或 `:optimized`
+- Or `:optimized`
 
-当前 apply 成功条件：
+Apply success criteria:
 
-- optimize 命令成功
-- 目标镜像产物存在
-- smoke 可消费
+- The optimize command succeeds
+- The target image artifact exists
+- The smoke check can consume it
 
-如果这些成立，即使 quality warning 很多，`apply` 仍应是 `passed`。
+When these conditions hold, `apply` remains `passed` even with many quality warnings.
 
 dry-run：
 
@@ -315,11 +317,11 @@ python3 scripts/oneclick_product.py apply \
   --dry-run
 ```
 
-dry-run 不会生成真正可用的优化镜像，因此结果会带 `quality_status=unknown`，并给出建议而不是可发布结论。
+Dry-run does not generate a usable optimized image. Its result carries `quality_status=unknown` and recommendations rather than a publish-ready conclusion.
 
 ## 12. `benchmark`
 
-### 直接 benchmark 两组比较
+### Direct two-group benchmark
 
 ```bash
 python3 scripts/oneclick_product.py benchmark \
@@ -328,7 +330,7 @@ python3 scripts/oneclick_product.py benchmark \
   --opt-image <OPT_IMAGE>
 ```
 
-### 当前主实验的 triple benchmark
+### Main experiment triple benchmark
 
 ```bash
 python3 scripts/oneclick_product.py benchmark \
@@ -342,12 +344,12 @@ python3 scripts/oneclick_product.py benchmark \
   --runs 3
 ```
 
-重要规则：
+Required combinations:
 
-- `--comparison-mode raw-full-vs-estargz-lazy-triple` 必须配 `--unopt-image`
-- `run --benchmark --bench-comparison-mode raw-full-vs-estargz-lazy-triple` 必须配 `--bench-unopt-image`
+- `--comparison-mode raw-full-vs-estargz-lazy-triple` requires `--unopt-image`
+- `run --benchmark --bench-comparison-mode raw-full-vs-estargz-lazy-triple` requires `--bench-unopt-image`
 
-benchmark 相关常用参数：
+Common benchmark parameters:
 
 - `--mode struct|ready`
 - `--workload`
@@ -358,7 +360,7 @@ benchmark 相关常用参数：
 - `--pull-policy`
 - `--cold-mode local-cold|registry-cold-strict`
 
-benchmark 也支持对应的容器运行时参数：
+Benchmark also supports the corresponding container runtime parameters:
 
 - `--container-gpus`
 - `--container-ipc`
@@ -374,17 +376,17 @@ python3 scripts/oneclick_product.py report \
   --work-dir /tmp/imageopt_run
 ```
 
-报告会汇总：
+The report collects:
 
 - overall status
 - mode / mode result
 - startup backend
-- analyze advisory 字段
-- LLM fallback 或 grounding 状态
-- apply 可消费性
-- benchmark validity 与 invalid reasons
+- Analyze advisory fields
+- LLM fallback or grounding status
+- Apply consumability
+- Benchmark validity and invalid reasons
 
-## 14. 当前 `ready-serving-layout-trap-v5` 主实验的推荐调用
+## 14. Recommended invocation for `ready-serving-layout-trap-v5`
 
 ```bash
 python3 scripts/oneclick_product.py run <RAW_IMAGE> \
@@ -398,17 +400,17 @@ python3 scripts/oneclick_product.py run <RAW_IMAGE> \
   --bench-unopt-image <UNOPT_ESTARGZ_IMAGE>
 ```
 
-## 15. Preset 与 workload
+## 15. Presets and workloads
 
-当前 `run` 内的 preset 仍然存在：
+The following presets remain available in `run`:
 
 - `tfpy-half-plus-two-io1g`
 - `tf-serving-efficientnet-v2-b0`
 - `tf-serving-half-plus-two`
 
-它们只是 CLI 默认值集合。
+They are collections of CLI defaults only.
 
-当前 workload 选择中包含：
+Available workloads include:
 
 - `none`
 - `ready-serving-bootstrap-v2`
@@ -419,22 +421,22 @@ python3 scripts/oneclick_product.py run <RAW_IMAGE> \
 - `tf-serving-efficientnet-v2-b0`
 - `tf-serving-half-plus-two`
 
-## 16. 恢复和暂停
+## 16. Resume and pause
 
-当 `llm-manual` 进入网页端暂停时：
+When `llm-manual` pauses for web input:
 
-- `manifest.json` 中的 `llm_optimize` stage 会是 `paused`
-- `resume_inputs.manual_response_file.format` 会记录为 `json`
-- `resume_command` 会指向 `resume_manual_web_llm.sh` 或等价的 CLI 命令
+- The `llm_optimize` stage in `manifest.json` becomes `paused`
+- `resume_inputs.manual_response_file.format` is recorded as `json`
+- `resume_command` points to `resume_manual_web_llm.sh` or an equivalent CLI command
 
-当 `run` 在同一 `work-dir` 重启时：
+When `run` restarts in the same `work-dir`:
 
-- 已 `passed` 的 stage 会被跳过
-- `paused` 或 `failed` 的后续 stage 会继续处理
+- Stages marked `passed` are skipped
+- Subsequent `paused` or `failed` stages continue processing
 
-## 17. 建议优先检查的文件
+## 17. Files to check first
 
-如果需要核对一次 run 是否符合当前合同，建议优先检查：
+To check whether a run satisfies the current contract, inspect:
 
 1. `manifest.json`
 2. `quality_gate.json`
